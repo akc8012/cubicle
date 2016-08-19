@@ -5,7 +5,7 @@ using System.Collections;
 public class FollowCam : MonoBehaviour
 {
 	public float dist = 1;
-	public float vert = 1
+	public float vert = 1;
 
 	Transform player;
 
