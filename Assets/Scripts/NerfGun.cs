@@ -4,10 +4,14 @@ using System.Collections;
 
 public class NerfGun : MonoBehaviour
 {
-    //How many nerfs can the gun fire per second
-    private int shotsPerSecond;
-    //How far the gun can shoot a nerf in METERS
-    private float range;
+
+    public GameObject nerfBullet;   //Get the prefab for the nerf bullets
+
+    private int shotsPerSecond;     //How many nerfs can the gun fire per second
+    private float range;            //How far the gun can shoot a nerf in METERS
+
+    public Vector3 position;         //The gun position
+    public float distanceFromMuzzle; //So we can change the spawn location of the bullet on the fly
 
     //Upgrades or "Power Ups" for the gun
     enum States
@@ -24,8 +28,15 @@ public class NerfGun : MonoBehaviour
         GunPowerUp(0);
     }
 
+    void Start()
+    {
+        Fire();
+    }
+
 	void Update()
 	{
+        position = this.transform.position;
+
         //Small FSM for the different states of the gun for upgrades.
         switch(state)
         {
@@ -66,7 +77,7 @@ public class NerfGun : MonoBehaviour
     //Fires the gun when trigger is pulled
     public void Fire()
     {
-
+        Instantiate(nerfBullet, new Vector3(position.x, position.y, (transform.localPosition.z + distanceFromMuzzle)), Quaternion.identity);
     }
 
     #region Variable Helpers
