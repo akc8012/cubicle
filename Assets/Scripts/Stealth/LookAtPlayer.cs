@@ -51,10 +51,11 @@ public class LookAtPlayer : MonoBehaviour
 					state = States.GoBack;
 					goToTargetSet = false;
 					
-					if (target == player.position)
+					if (target == player.position && GameObject.FindWithTag("Player").GetComponent<Movement>().CanGet())
 					{
 						GameObject.FindWithTag("Canvas").GetComponent<ScreenFade>().FIAD();
 						GameObject.FindWithTag("Player").GetComponent<Movement>().SetMovement(false);
+						return;
 					}
 				}
 			}

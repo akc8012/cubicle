@@ -5,6 +5,7 @@ using System.Collections;
 public class Movement : MonoBehaviour
 {
 	CharacterController controller;
+	Collider col;
 	Transform cam;
 	Animator anim;
 
@@ -14,6 +15,7 @@ public class Movement : MonoBehaviour
 	float rotSmooth = 20;    // smoothing on the lerp to rotate towards stick direction
 	Vector3 startPos;
 	Quaternion startRot;
+	bool gottem = false;
 
 	void Start()
 	{
@@ -21,6 +23,7 @@ public class Movement : MonoBehaviour
 		SetCam(GameObject.FindWithTag("MainCamera").transform);
 		anim = GetComponentInChildren<Animator>();
 		startPos = transform.position;
+		col = GetComponent<Collider>();
 	}
 
 	void Update()
@@ -92,9 +95,11 @@ public class Movement : MonoBehaviour
 	public void SetMovement(bool enable)
 	{
 		controller.enabled = enable;
+		col.enabled = enable;
 		if (!enable)
 		{
 			anim.SetFloat("Walking", 0);
+			gottem = true;
 		}
 	}
 
@@ -102,11 +107,17 @@ public class Movement : MonoBehaviour
 	{
 		transform.position = startPos;
 		transform.rotation = startRot;
+		gottem = false;
 	}
 
 	public void NextLevel()
 	{
 		startPos = transform.position;
 		startRot = transform.rotation;
+	}
+
+	public bool CanGet()
+	{
+		return !gottem;
 	}
 }
