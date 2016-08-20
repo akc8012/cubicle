@@ -6,29 +6,26 @@ public class StealthFlop : MonoBehaviour
 {
 	public float dist = 0.15f;
 	ZoomCam zoomCam;
-	//float startY;
+	bool visible = true;
 
 	void Start()
 	{
 		zoomCam = GameObject.FindWithTag("MainCamera").GetComponent<ZoomCam>();
-		//startY = transform.position.y;
 	}
 
 	void Update()
 	{
-		//Vector3 newPos;
-
 		if (Input.GetButton("Stealth"))
 		{
-			//newPos = new Vector3(transform.position.x, -dist, transform.position.z);
 			zoomCam.ZoomOut();
+			visible = false;
 		}
 		else
 		{
-			//newPos = new Vector3(transform.position.x, startY, transform.position.z);
 			zoomCam.ZoomIn();
+			visible = true;
 		}
-
-		//transform.position = newPos;
 	}
+
+	public bool GetVisible() { return visible; }
 }

@@ -86,13 +86,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 448366}
   - 33: {fileID: 3382400}
-  - 136: {fileID: 13612914}
   - 23: {fileID: 2375468}
-  - 143: {fileID: 14394074}
-  - 114: {fileID: 11484114}
-  - 114: {fileID: 11488042}
   m_Layer: 0
-  m_Name: Player
+  m_Name: TristanPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,8 +267,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 426350}
-  - 114: {fileID: 11420254}
-  - 82: {fileID: 8208566}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Gun
@@ -604,7 +598,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401868}
-  - 95: {fileID: 9559616}
   m_Layer: 0
   m_Name: OfficeCharacter2
   m_TagString: Untagged
@@ -1289,7 +1282,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8, y: 1.046, z: -15.33}
+  m_LocalPosition: {x: -1.511, y: 1.046, z: -15.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401868}
@@ -1744,152 +1737,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113886}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!82 &8208566
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139386}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 20cea24296ab5fb44b3bccea3095a066, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!95 &9559616
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177732}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ad7b3812e437f3840a05f486009541bb, type: 3}
-  m_Controller: {fileID: 9100000, guid: ddd2b93983b21c94a9eac93e6a0ea477, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11420254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acfe7972b1110f459138444c7d4288e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 9559616}
-  nerfBullet: {fileID: 131576, guid: de9c3318a16b08d4ab755702bb657c7a, type: 2}
-  sound: {fileID: 0}
-  powerUp: 0
-  powerUp2: 0
-  powerUpTimer: 0
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &11484114
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d305f851f96a3774b8e44fc5cdefb75f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11488042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b47c60a2becf34d9d812157cbe61d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dist: 0.15
---- !u!136 &13612914
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113886}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13785550
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1901,7 +1748,7 @@ SkinnedMeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 2533c2574f008954b854739cdf2e8070, type: 2}
-  - {fileID: 2100000, guid: bf016fa3198897f40942727828659637, type: 2}
+  - {fileID: 2100000, guid: f904eea5c46b7c0408a81a3634cc6cf7, type: 2}
   - {fileID: 2100000, guid: 86a95502a9f702f4abbd74398b048cc6, type: 2}
   - {fileID: 2100000, guid: e9bf4916cfaee0b4abbb1a46c8cb1808, type: 2}
   m_SubsetIndices: 
@@ -1968,23 +1815,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -18.185104, y: -0.88445854, z: 6.197153}
     m_Extent: {x: 96.42601, y: 41.725456, z: 36.845078}
   m_DirtyAABB: 0
---- !u!143 &14394074
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 113886}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

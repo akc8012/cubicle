@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
 		float speed = 0.0f;
 		Vector3 moveDir = GetInput(ref speed);
 		Rotate(moveDir, speed);
-		speed *= moveSpeed;
+		speed *= Input.GetButton("Stealth") ? moveSpeed/16 : moveSpeed;
 		
 		velocity = transform.forward * speed;
 		velocity = Vector3.ClampMagnitude(velocity, maxVel);

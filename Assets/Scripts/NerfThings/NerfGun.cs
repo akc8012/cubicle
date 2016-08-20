@@ -72,7 +72,7 @@ public class NerfGun : MonoBehaviour
 		//-------------------------------------------------------//
 
 		//If the gun has not been fired
-        if (!hasFired)
+        if (!hasFired && !Input.GetButton("Stealth"))
         {
             ReloadTimer = 1f;                //Set the reloading timer to 1 seconds every frame the HasFired is false
 			if (Input.GetButtonDown("Fire1"))     // GetAxis

@@ -5,11 +5,11 @@ using UnityEngine.EventSystems;
 
 public class ExitButton : MonoBehaviour, ISelectHandler
 {
-    AudioSource audio;
+    AudioSource sound;
 
 	void Start()
 	{
-        audio = GetComponent<AudioSource>();
+		sound = GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -19,6 +19,6 @@ public class ExitButton : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        audio.Play();
+		sound.Play();
     }
 }

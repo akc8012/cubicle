@@ -92,12 +92,15 @@ public class LookAtPlayer : MonoBehaviour
 
 			if (Physics.Raycast(whiskers[i], out hit) && hit.collider.gameObject.tag == "Player")
 			{
-				found = true;
+				if (hit.collider.gameObject.GetComponent<StealthFlop>().GetVisible())
+				{
+					found = true;
 
-				if (possibleTime == -1)
-					possibleTime = Time.timeSinceLevelLoad;
+					if (possibleTime == -1)
+						possibleTime = Time.timeSinceLevelLoad;
 
-				break;
+					break;
+				}
 			}
 		}
 
