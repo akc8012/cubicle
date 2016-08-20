@@ -56,6 +56,8 @@ public class ScreenFade : MonoBehaviour
 			yield return null;
 		}
 		group.alpha = 1;
+		GameObject.FindWithTag("Player").GetComponent<Movement>().Reset();
+		GameObject.FindWithTag("Player").GetComponent<Movement>().SetMovement(true);
 		StartCoroutine(FadeOutAndNewLevel());
 	}
 
