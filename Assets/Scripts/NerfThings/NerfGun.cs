@@ -8,12 +8,12 @@ public class NerfGun : MonoBehaviour
     public GameObject nerfBullet;   //Get the prefab for the nerf bullets
     private GameObject bulletSpawnPoint; //Get the spawn point which is child of this object
 
-    public float bulletForce;       //The force the projectile will have
+    private float bulletForce;       //The force the projectile will have
 
     private bool hasFired;    //Flag for if the gun has fired
     private bool reloading;       //Flag for if the gun is reloading
 
-    public float reloadTimer;     //The timer dedicated to reloading
+    private float reloadTimer;     //The timer dedicated to reloading
 
     public Vector3 position;         //The gun position
     public Quaternion rotation;      //The gun rotation
@@ -33,12 +33,13 @@ public class NerfGun : MonoBehaviour
         //Find the bullet spawn point
         bulletSpawnPoint = GameObject.Find("BulletSpawnPoint");
         //Set the Gun's state to the default
-        GunPowerUp(0);
+        GunPowerUp(1);
 
         HasFired = false;                   //Set HasFired to false at the beginning of the game
-        reloadTimer = 3;                    //Set the reload timer to 3 seconds
-        reloading = false;                  //Set Reloading to false at the beginning of the game
+        ReloadTimer = 3f;                    //Set the reload timer to 3 seconds
+        Reloading = false;                  //Set Reloading to false at the beginning of the game
     }
+
 
 	void Update()
 	{
@@ -49,13 +50,13 @@ public class NerfGun : MonoBehaviour
         switch(state)
         {
             case (States)0:
-                
+                BulletForce = 500f;
                 break;
             case (States)1:
-
+                BulletForce = 1000f;
                 break;
             case (States)2:
-
+                BulletForce = 1500f;
                 break;
         }
         //-------------------------------------------------------//
@@ -63,7 +64,8 @@ public class NerfGun : MonoBehaviour
         //If the gun has not been fired
         if (!hasFired)
         {
-            reloadTimer = 3f;                       //Set the reloading timer to 3 seconds every frame the HasFired is false
+           
+            ReloadTimer = 3f;                //Set the reloading timer to 3 seconds every frame the HasFired is false
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Fire();
@@ -75,10 +77,10 @@ public class NerfGun : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
-                reloading = true;
+                Reloading = true;
             }
         }
-        if(reloading)
+        if(Reloading)
         {
             Reload();
         }
@@ -118,7 +120,7 @@ public class NerfGun : MonoBehaviour
         //Set the rigid body of the nerf bullet and then apply a forward force to it
         Rigidbody bulletRb;
         bulletRb = theBullet.GetComponent<Rigidbody>();
-        bulletRb.AddForce(transform.forward * bulletForce);
+        bulletRb.AddForce(transform.forward * BulletForce);
 
         HasFired = true;
         
@@ -127,11 +129,11 @@ public class NerfGun : MonoBehaviour
     //Reloads the nerf gun when given the proper input
     public void Reload()
     {
-        reloadTimer -= Time.deltaTime;      //Count the reload timer down
-        if (reloadTimer <= 0)                //If the reload timer is less than or equal to 0, switch the flag for hasFired back to off
+        ReloadTimer -= Time.deltaTime;      //Count the reload timer down
+        if (ReloadTimer <= 0)                //If the reload timer is less than or equal to 0, switch the flag for hasFired back to off
         {
             HasFired = false;           //Set the gun to a fire-able state
-            reloading = false;          //Gun is no longer reloading
+            Reloading = false;          //Gun is no longer reloading
         }
     }
 
@@ -146,6 +148,16 @@ public class NerfGun : MonoBehaviour
     {
         set { reloading = value; }
         get { return reloading; }
+    }
+    public float BulletForce
+    {
+        set { bulletForce = value; }
+        get { return bulletForce; }
+    }
+    public float ReloadTimer
+    {
+        set { reloadTimer = value; }
+        get { return reloadTimer; }
     }
     #endregion
 
