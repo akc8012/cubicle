@@ -67,7 +67,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 	void DefineStartEnd(){
 
-		int randStart = (int)Random.Range (2, 4);
+		int randStart = 2;//(int)Random.Range (2, 4);
 		Vector2 startSpot = new Vector2 (0, 0);
 		Vector2 endSpot = new Vector2 (0, 0);
 
@@ -93,7 +93,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 			break;
 
 		case 2:
-			randStart = (int)Random.Range (0, floorSize.y/2);
+			randStart = (int)Random.Range (0+1, floorSize.y-1);
 
 			startSpot = new Vector2(0, randStart);
 			endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
@@ -103,7 +103,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 			break;
 
 		case 3:
-			randStart = (int)Random.Range (floorSize.y/2, floorSize.x/2);
+			randStart = (int)Random.Range (floorSize.y/2, floorSize.y-1);
 
 			startSpot = new Vector2(0, randStart);
 			endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
@@ -186,7 +186,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 			for (int j = 0; j < floorSize.y; j++) {
 				if (!mapTile [i, j].GetVisited ()) {
 					
-					if (i != 0 && j != 0 && i != 9 && j != 9) {
+					if (i != 0 && j != 0 && i != 9 && j != 9 && i != 2 && j != 2 && i != 7 && j != 7) {
 						Debug.Log (i + " : " + j);
 						int rand = 1;//Random.Range (0, 3);
 						switch (rand) {
@@ -213,65 +213,54 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 					} else {
 						
+
 						if (i == 0) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (CubeLeft, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 0, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
 						}
 						if (j == 0) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (CubeLeft, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 270, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
 						}
 						if (j == 9) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (CubeLeft, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 90, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
 						}
 						if (i == 9) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (CubeLeft, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 180, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
+						}
+						if (i == 0 && i == 2) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
+						}
+						if (j == 0 && j == 2) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
+						}
+						if (j == 9 && j == 7) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
+						}
+						if (i == 9 && i == 7) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
 						}
 						if (i == 0 && j == 0) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 270, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 270);
 						}
 						if (i == 0 && j == 9) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 0, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 0);
 						}
 						if (i == 9 && j == 0) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 180, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
 						}
 						if (i == 9 && j == 9) {
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							tiles [i, j].transform.Rotate (new Vector3 (0, 90, 0));
-							tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
-							tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 90);
 						}
 					}
 				}
 			}
 		}
+	}
+
+	void ReplaceCell(int i, int j, GameObject instObj, float tileSizeX, float tileSizeY, int rotAngle){
+		Destroy (tiles [i, j].gameObject);
+		tiles [i, j] = (GameObject)Instantiate (instObj, new Vector3 (i * tileSizeX * 10, 0, j * tileSizeY * 10), Quaternion.identity);
+		tiles [i, j].transform.Rotate (new Vector3(0,rotAngle,0));
+		tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSizeX, 1, tileSizeY);
+		tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
 	}
 }
