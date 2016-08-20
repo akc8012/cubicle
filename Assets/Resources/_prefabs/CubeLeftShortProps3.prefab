@@ -25,6 +25,7 @@ GameObject:
   - 4: {fileID: 462076}
   - 33: {fileID: 3392432}
   - 23: {fileID: 2348548}
+  - 64: {fileID: 6455588}
   m_Layer: 0
   m_Name: floor (1)
   m_TagString: Untagged
@@ -74,6 +75,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 426802}
+  - 64: {fileID: 6444080}
   m_Layer: 0
   m_Name: OfficeDesk
   m_TagString: Untagged
@@ -91,6 +93,7 @@ GameObject:
   - 4: {fileID: 472984}
   - 33: {fileID: 3350542}
   - 23: {fileID: 2331668}
+  - 64: {fileID: 6438496}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -172,6 +175,7 @@ GameObject:
   - 4: {fileID: 457144}
   - 33: {fileID: 3342418}
   - 23: {fileID: 2305768}
+  - 64: {fileID: 6409336}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -390,6 +394,7 @@ GameObject:
   - 4: {fileID: 412542}
   - 33: {fileID: 3392446}
   - 23: {fileID: 2397494}
+  - 64: {fileID: 6469000}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -1484,6 +1489,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171432}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &6409336
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134092}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
 --- !u!64 &6420330
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -1496,6 +1513,54 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &6438496
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6444080
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114244}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 0}
+--- !u!64 &6455588
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100550}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6469000
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176480}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

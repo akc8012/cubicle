@@ -94,6 +94,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442456}
+  - 64: {fileID: 6470456}
   m_Layer: 0
   m_Name: OfficeDesk
   m_TagString: Untagged
@@ -213,6 +214,7 @@ GameObject:
   - 4: {fileID: 466754}
   - 33: {fileID: 3338320}
   - 23: {fileID: 2329828}
+  - 64: {fileID: 6429118}
   m_Layer: 0
   m_Name: floor (1)
   m_TagString: Untagged
@@ -784,6 +786,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102192}
   m_Mesh: {fileID: 4300008, guid: 943ac8112eb4f5a47b106f22a0193d4d, type: 3}
+--- !u!64 &6429118
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6470456
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 0}
 --- !u!64 &6496396
 MeshCollider:
   m_ObjectHideFlags: 1

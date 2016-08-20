@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 494896}
   - 33: {fileID: 3353952}
   - 23: {fileID: 2332104}
+  - 64: {fileID: 6430990}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -27,6 +28,7 @@ GameObject:
   - 4: {fileID: 416452}
   - 33: {fileID: 3314114}
   - 23: {fileID: 2387430}
+  - 64: {fileID: 6406416}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -62,6 +64,7 @@ GameObject:
   - 4: {fileID: 478390}
   - 33: {fileID: 3380568}
   - 23: {fileID: 2350590}
+  - 64: {fileID: 6451024}
   m_Layer: 0
   m_Name: floor (1)
   m_TagString: Untagged
@@ -252,6 +255,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183270}
   m_Mesh: {fileID: 4300000, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6406416
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
 --- !u!64 &6413958
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -264,6 +279,30 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &6430990
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 122786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6451024
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

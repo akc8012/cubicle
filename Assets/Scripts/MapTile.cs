@@ -5,15 +5,16 @@ public class MapTile
 {
 	// Type of tile
 	GameObject tileType;
-	//Vector2 position;
+	Vector3 position;
 
 	bool visited = false;
+	bool emptyTileCheck = false;
 
 	public MapTile(
 		Vector2 _pos,
 		bool _visited)
 	{
-		//position = _pos;
+		position = _pos;
 		visited = _visited;
 	}
 
@@ -24,5 +25,20 @@ public class MapTile
 	public bool GetVisited(){
 		return visited;
 	}
+
+	public void SetEmptyTileCheck(bool newValue){
+		emptyTileCheck = newValue;
+	}
+
+	public bool GetEmptyTileCheck(){
+		return emptyTileCheck;
+	}
 		
+	public void SetPosition(Vector3 newValue){
+		position = newValue;
+	}
+
+	public Vector3 GetPosition(){
+		return position;
+	}
 }

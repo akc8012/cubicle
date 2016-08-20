@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 443246}
+  - 64: {fileID: 6415536}
   m_Layer: 0
   m_Name: OfficeDesk
   m_TagString: Untagged
@@ -59,6 +60,7 @@ GameObject:
   - 4: {fileID: 431064}
   - 33: {fileID: 3329836}
   - 23: {fileID: 2349082}
+  - 64: {fileID: 6400866}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -110,6 +112,7 @@ GameObject:
   - 4: {fileID: 441426}
   - 33: {fileID: 3328444}
   - 23: {fileID: 2333486}
+  - 64: {fileID: 6408180}
   m_Layer: 0
   m_Name: floor (1)
   m_TagString: Untagged
@@ -247,6 +250,7 @@ GameObject:
   - 4: {fileID: 477502}
   - 33: {fileID: 3370516}
   - 23: {fileID: 2309292}
+  - 64: {fileID: 6409662}
   m_Layer: 0
   m_Name: solidWall
   m_TagString: Untagged
@@ -910,6 +914,54 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165090}
   m_Mesh: {fileID: 4300026, guid: 943ac8112eb4f5a47b106f22a0193d4d, type: 3}
+--- !u!64 &6400866
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115114}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6408180
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6409662
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 4300006, guid: be660f0ba1b5f714aa17050b15c43ee4, type: 3}
+--- !u!64 &6415536
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 110010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_Mesh: {fileID: 0}
 --- !u!64 &6417252
 MeshCollider:
   m_ObjectHideFlags: 1

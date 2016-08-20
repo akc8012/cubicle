@@ -17,12 +17,13 @@ public class ProceduralMapGeneration : MonoBehaviour
 	Vector2 floorSize;
 	Vector2 tileSize = new Vector2(0.1f,0.1f); 	// width, length
 	MapTile[,] mapTile;
+	MapTile[] mapTileArray;
 
 	GameObject[,] tiles;
-	public GameObject emptyTile, 
+	GameObject emptyTile, 
 		Cube2Wall,  Cube2WallCornerTall,  Cube2WallCorner, 
 		Cube3Wall,  Cube4Wall,  CubeTEST,
-		CubeLeftShort, CubeLeftTall, CubeLeftDoor,
+		CubeLeftShort, CubeLeftTall,
 
 		CubeLeftShortProps1, CubeLeftShortProps2,
 		CubeLeftShortProps3, CubeLeftShortProps4,
@@ -34,7 +35,13 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeEmptyProps5, CubeEmptyProps6,
 
 		Cube2WallCornerProps1, Cube2WallCornerProps2,
-		Cube2WallCornerProps3, Cube2WallCornerProps4;
+		Cube2WallCornerProps3, Cube2WallCornerProps4,
+
+		CubeDoor;
+
+	public GameObject enemyDude;
+	public GameObject playerDude;
+	int numberOfEnemies;
 
 	void Start()
 	{
@@ -44,6 +51,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CreateBasicTileLayout ();
 		DefineStartEnd ();
 		FillGrid ();
+		PlaceEnemies ();
 	}
 
 	void Update()
@@ -56,6 +64,48 @@ public class ProceduralMapGeneration : MonoBehaviour
 		mapTile = new MapTile[scaleSize, scaleSize];
 		tiles = new GameObject[scaleSize, scaleSize];
 		floorSize = new Vector2(scaleSize,scaleSize);	// width, length - always square
+		mapTileArray = new MapTile[200];
+
+		numberOfEnemies = Random.Range (3, 9);
+		playerDude = GameObject.FindGameObjectWithTag ("Player");
+	}
+
+	void PlaceEnemies(){
+
+		int c = 0;
+
+		for (int i = 0; i < scaleSize; i++) {
+			for (int j = 0; j < scaleSize; j++) {
+				if (mapTile [i, j].GetVisited ()) {
+					
+					mapTileArray [c] = mapTile [i, j];
+					mapTileArray [c].SetPosition (new Vector3 (i, 0, j));
+					c++;
+				}
+			}
+		}
+
+		for (int i = 0; i < scaleSize; i++) {
+			for (int j = 0; j < scaleSize; j++) {
+				if (mapTile [i, j].GetEmptyTileCheck ()) {
+
+					mapTileArray [c] = mapTile [i, j];
+					mapTileArray [c].SetPosition (new Vector3 (i, 0, j));
+					c++;
+				}
+			}
+		}
+
+		for (int i = 0; i < numberOfEnemies; i++) {
+
+			int rand = Random.Range (0, c);
+			GameObject enemyInst = Instantiate (enemyDude, mapTileArray [rand].GetPosition(), Quaternion.identity) as GameObject;
+			enemyInst.GetComponent<Transform> ().localPosition = new Vector3 (
+				enemyInst.GetComponent<Transform> ().localPosition.x,
+				0.35f,
+				enemyInst.GetComponent<Transform> ().localPosition.z);
+			enemyInst.GetComponent<Transform> ().localScale = new Vector3 (0.35f, 0.35f, 0.35f);
+		}
 	}
 
 	void FindAssets(){
@@ -64,7 +114,6 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeTEST 			= Resources.Load ("GenericModules/CubeTEST") as GameObject;
 		CubeLeftShort 		= Resources.Load ("GenericModules/CubeLeftShort") as GameObject;
 		CubeLeftTall 		= Resources.Load ("GenericModules/CubeLeftTall") as GameObject;
-		CubeLeftDoor		= Resources.Load ("GenericModules/CubeLeftTallDoor") as GameObject;
 		Cube2Wall 			= Resources.Load ("GenericModules/Cube2Wall") as GameObject;
 		Cube2WallCorner		= Resources.Load ("GenericModules/Cube2WallCorner") as GameObject;
 		Cube2WallCornerTall = Resources.Load ("GenericModules/Cube2WallCornerTall") as GameObject;
@@ -90,6 +139,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 		Cube2WallCornerProps2 	= Resources.Load ("_prefabs/Cube2WallCornerProps2") as GameObject;
 		Cube2WallCornerProps3 	= Resources.Load ("_prefabs/Cube2WallCornerProps3") as GameObject;
 		Cube2WallCornerProps4 	= Resources.Load ("_prefabs/Cube2WallCornerProps4") as GameObject;
+
+		CubeDoor 			= Resources.Load ("GenericModules/CubeLeftTallDoor") as GameObject;
 	}
 		
 	void CreateBasicTileLayout(){
@@ -99,58 +150,32 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 				ReplaceCell (i, j, emptyTile, tileSize.x, tileSize.y, 0);
 				mapTile[i,j] = new MapTile (new Vector2(tiles[i,j].transform.position.x, tiles[i,j].transform.position.z), false);
+				mapTile [i, j].SetEmptyTileCheck (true);
 			}
 	}
 
 	void DefineStartEnd(){
 
-		int randStart = 2;//(int)Random.Range (2, 4);
+		int randStart;
 		Vector2 startSpot = new Vector2 (0, 0);
 		Vector2 endSpot = new Vector2 (0, 0);
 
-		switch (randStart) {
-		case 0:
-			randStart = (int)Random.Range (0, floorSize.x / 2);
+		randStart = (int)Random.Range (0+1, floorSize.y-1);
 
-			startSpot = new Vector2(randStart, 0);
-			endSpot = new Vector2(floorSize.x - randStart -1, floorSize.y -1);
+		startSpot = new Vector2(0, randStart);
+		ReplaceCell (0, randStart, CubeDoor, tileSize.x, tileSize.y, 0); 
 
-			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
-			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
-			break;
+		endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
+		ReplaceCell ((int)(floorSize.x -1), (int)(floorSize.y - randStart -1), CubeDoor, tileSize.x, tileSize.y, 180);
 
-		case 1:
-			randStart = (int)Random.Range (floorSize.x/2, floorSize.x);
+		mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
+		mapTile[(int)startSpot.x, (int)startSpot.y].SetPosition (new Vector3(startSpot.x, 0, startSpot.y));
 
-			startSpot = new Vector2(randStart, 0);
-			endSpot = new Vector2(floorSize.x - randStart -1, floorSize.y -1);
+		playerDude.transform.position = new Vector3 (startSpot.x, 0.35f, startSpot.y);
+		playerDude.transform.localScale = new Vector3 (0.35f, 0.35f, 0.35f);
 
-			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
-			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
-			break;
-
-		case 2:
-			randStart = (int)Random.Range (0+1, floorSize.y-1);
-
-			startSpot = new Vector2(0, randStart);
-			endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
-
-			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
-			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
-			break;
-
-		case 3:
-			randStart = (int)Random.Range (floorSize.y/2, floorSize.y-1);
-
-			startSpot = new Vector2(0, randStart);
-			endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
-
-			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
-			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
-			break;
-		}
-
-		Debug.Log ("Start: " + startSpot + ", End: " + endSpot);
+		mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
+		mapTile[(int)endSpot.x, (int)endSpot.y].SetPosition (new Vector3(endSpot.x, 0, endSpot.y));
 
 		FindPath (startSpot, endSpot);
 	}
@@ -163,22 +188,17 @@ public class ProceduralMapGeneration : MonoBehaviour
 		int previousLength = 0;
 		int cutPoint;
 
-		Debug.Log ("Number of turns: " + turnCount + " and Vary Length: " + varyLength);
-
-
 		// choose random lengths of each turn for number of turns
 		// lengths have to be between (previousLength) and (maxLength/turnCount)
 		int[] lengths = new int[2];
 		int temp = Random.Range (1, scaleSize-1);
 		cutPoint = temp;
-		Debug.Log ("Cut Point " + ": " + (temp));
+	
 		for (int i = 0; i < 2; i++) {
 			
 			lengths [i] = temp - previousLength;
 			previousLength = lengths [i];
 			temp = scaleSize;
-
-			Debug.Log ("Length " + (i+1) + ": " + lengths [i]);
 		}
 
 		// TEST:  change color of emptyTiles
@@ -220,6 +240,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 		
 		for (int i = 0; i < floorSize.x; i++) {
 			for (int j = 0; j < floorSize.y; j++) {
+				mapTile [i, j].SetEmptyTileCheck (true);
 				if (!mapTile [i, j].GetVisited ()) {
 
 					#region boundary walls
@@ -311,7 +332,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 			if (!mapTile [i, 1].GetVisited () && !mapTile [i, (int)(scaleSize - 2)].GetVisited ()) {
 				if (i != 2 && i != scaleSize - 2) {
 
-					int rand = Random.Range (0, 7);
+					int rand = Random.Range (0, 8);
 
 					switch (rand) {
 					case 0:
@@ -334,6 +355,9 @@ public class ProceduralMapGeneration : MonoBehaviour
 						break;
 					case 6:
 						ReplaceCell (i, 1, CubeLeftShortProps7, tileSize.x, tileSize.y, 270);
+						break;
+					case 7:
+						ReplaceCell (i, 1, CubeLeftShort, tileSize.x, tileSize.y, 270);
 						break;
 					}
 
@@ -360,6 +384,9 @@ public class ProceduralMapGeneration : MonoBehaviour
 						break;
 					case 6:
 						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps7, tileSize.x, tileSize.y, 90);
+						break;
+					case 7:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShort, tileSize.x, tileSize.y, 90);
 						break;
 					}
 				}
@@ -394,6 +421,9 @@ public class ProceduralMapGeneration : MonoBehaviour
 					case 6:
 						ReplaceCell (1, j, CubeLeftShortProps7, tileSize.x, tileSize.y, 0);
 						break;
+					case 7:
+						ReplaceCell (1, j, CubeLeftShort, tileSize.x, tileSize.y, 0);
+						break;
 					}
 
 					rand = Random.Range (0, 7);
@@ -420,6 +450,9 @@ public class ProceduralMapGeneration : MonoBehaviour
 					case 6:
 						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
 						break;
+					case 7:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShort, tileSize.x, tileSize.y, 180);
+						break;
 					}
 				}
 			}
@@ -437,11 +470,11 @@ public class ProceduralMapGeneration : MonoBehaviour
 							if(randCase >= 0 && randCase < 10)
 								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
 							if(randCase >= 10 && randCase < 20)
-								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+								ReplaceCell (i, j, Cube2WallCornerProps2, tileSize.x, tileSize.y, 180);
 							if(randCase >= 20 && randCase < 30)
-								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+								ReplaceCell (i, j, Cube2WallCornerProps3, tileSize.x, tileSize.y, 180);
 							if(randCase >= 30 && randCase < 40)
-								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+								ReplaceCell (i, j, Cube2WallCornerProps4, tileSize.x, tileSize.y, 180);
 							if(randCase >= 40 && randCase < 100)
 								ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
 						}
@@ -504,7 +537,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 	}
 
 	void ReplaceCell(int i, int j, GameObject instObj, float tileSizeX, float tileSizeY, int rotAngle){
-		if(tiles[i,j])
+		if (tiles [i, j])
 			Destroy (tiles [i, j].gameObject);
 		tiles [i, j] = (GameObject)Instantiate (instObj, new Vector3 (i * tileSizeX * 10, 0, j * tileSizeY * 10), Quaternion.identity);
 		tiles [i, j].transform.Rotate (new Vector3(0,rotAngle,0));
