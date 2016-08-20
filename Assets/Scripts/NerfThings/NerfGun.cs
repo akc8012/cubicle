@@ -96,6 +96,7 @@ public class NerfGun : MonoBehaviour
         if (powerUp)
         {
             GunPowerUp(1);
+            powerUpTimer = 4f;
             powerUpTimer -= Time.deltaTime;
             if(powerUpTimer <= 0)
             {
@@ -106,6 +107,7 @@ public class NerfGun : MonoBehaviour
         if (powerUp2)
         {
             GunPowerUp(2);
+            powerUpTimer = 4f;
             powerUpTimer -= Time.deltaTime;
             if(powerUpTimer <= 0)
             {
