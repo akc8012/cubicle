@@ -183,8 +183,6 @@ public class ProceduralMapGeneration : MonoBehaviour
 	void FindPath(Vector2 start, Vector2 end){
 
 		// choose how many turns the path will make
-		int turnCount = 1;
-		int varyLength = Random.Range(0,scaleSize/3) + 1;
 		int previousLength = 0;
 		int cutPoint;
 
