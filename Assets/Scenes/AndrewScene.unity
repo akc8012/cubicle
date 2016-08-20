@@ -141,6 +141,7 @@ GameObject:
   - 81: {fileID: 1279102335}
   - 114: {fileID: 1279102340}
   - 114: {fileID: 1279102341}
+  - 114: {fileID: 1279102342}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -234,12 +235,23 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1279102334}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87221106ac79f4049b4378eb74de596a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   closeness: 3
+--- !u!114 &1279102342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279102334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8bad537008b9445877b2185d9814de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1338411206
 Prefab:
   m_ObjectHideFlags: 0
@@ -395,7 +407,7 @@ MeshCollider:
   m_GameObject: {fileID: 1988365622}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
