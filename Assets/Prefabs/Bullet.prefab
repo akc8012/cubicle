@@ -12,6 +12,7 @@ GameObject:
   - 135: {fileID: 13517702}
   - 23: {fileID: 2306504}
   - 54: {fileID: 5456330}
+  - 114: {fileID: 11401552}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -79,6 +80,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &11401552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 104836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1404e8eff9835bf4ba7e5d7d05476c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionParticle: {fileID: 124650, guid: e04a743c15600f14a887d91eabb635a1, type: 2}
 --- !u!135 &13517702
 SphereCollider:
   m_ObjectHideFlags: 1
