@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class LookAtPlayer : MonoBehaviour
 {
 	public float rayY = 0.6f;
+	public float turningSpeed = 12;
 
 	Transform player;
 	List<Ray> whiskers = new List<Ray>();
@@ -24,6 +25,9 @@ public class LookAtPlayer : MonoBehaviour
 
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.P))
+			state = States.Searching;
+
 		if (state == States.Searching)
 			Search();
 		if (state == States.GoTowards)
@@ -64,7 +68,7 @@ public class LookAtPlayer : MonoBehaviour
 		{
 			state = States.GoTowards;
 			possibleTime = -1;
-			print("gottem");
+			print("found");
 			StartCoroutine(QuickLookAt());
 		}
 	}
@@ -93,17 +97,23 @@ public class LookAtPlayer : MonoBehaviour
 	IEnumerator QuickLookAt()
 	{
 		Vector3 dirVector = player.position - transform.position;
+		dirVector.y = 0;
 		Quaternion rot = Quaternion.LookRotation(dirVector);
 
-		while (Quaternion.Angle(transform.rotation, rot) > 0.01f)
+		while (Quaternion.Angle(transform.rotation, rot) > 3)
 		{
-			transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 12);
+			dirVector = player.position - transform.position;
+			dirVector.y = 0;
+			rot = Quaternion.LookRotation(dirVector);
+
+			transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * turningSpeed);
+			print("turning");
 			yield return null;
 		}
 	}
 
 	void GoForth()
 	{
-		state = States.Searching;
+		//state = States.Searching;
 	}
 }
