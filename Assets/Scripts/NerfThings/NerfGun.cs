@@ -42,6 +42,8 @@ public class NerfGun : MonoBehaviour
         HasFired = false;                   //Set HasFired to false at the beginning of the game
         ReloadTimer = 3f;                    //Set the reload timer to 3 seconds
         Reloading = false;                  //Set Reloading to false at the beginning of the game
+
+		powerUpTimer = 4f;
     }
 
 
