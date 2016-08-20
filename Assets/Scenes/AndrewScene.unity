@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acfe7972b1110f459138444c7d4288e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 355815849}
   nerfBullet: {fileID: 131576, guid: de9c3318a16b08d4ab755702bb657c7a, type: 2}
   powerUp: 0
   powerUp2: 0
@@ -172,7 +173,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 113886, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
@@ -310,11 +311,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 113886, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
   m_IsPrefabParent: 0
+--- !u!95 &355815849 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9500000, guid: ad7b3812e437f3840a05f486009541bb,
+    type: 3}
+  m_PrefabInternal: {fileID: 987107304}
 --- !u!1 &531897672 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100076, guid: 6cb27ad201d4cc941b2535c05b8f5d55, type: 3}

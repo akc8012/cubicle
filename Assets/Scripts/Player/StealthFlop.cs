@@ -6,17 +6,17 @@ public class StealthFlop : MonoBehaviour
 {
 	public float dist = 0.15f;
 	ZoomCam zoomCam;
-	float startY;
+	//float startY;
 
 	void Start()
 	{
 		zoomCam = GameObject.FindWithTag("MainCamera").GetComponent<ZoomCam>();
-		startY = transform.position.y;
+		//startY = transform.position.y;
 	}
 
 	void Update()
 	{
-		Vector3 newPos;
+		//Vector3 newPos;
 
 		if (Input.GetButton("Stealth"))
 		{

@@ -4,7 +4,7 @@ using System.Collections;
 
 public class NerfGun : MonoBehaviour
 {
-
+	public Animator anim;
     public GameObject nerfBullet;   //Get the prefab for the nerf bullets
     private GameObject bulletSpawnPoint; //Get the spawn point which is child of this object
 
@@ -68,11 +68,9 @@ public class NerfGun : MonoBehaviour
 		//-------------------------------------------------------//
 
 		//If the gun has not been fired
-		hasFired = false;
         if (!hasFired)
         {
-           
-            ReloadTimer = 3f;                //Set the reloading timer to 3 seconds every frame the HasFired is false
+            ReloadTimer = 1f;                //Set the reloading timer to 1 seconds every frame the HasFired is false
 			if (Input.GetButtonDown("Fire1"))     // GetAxis
 			{
                 Fire();
@@ -85,6 +83,7 @@ public class NerfGun : MonoBehaviour
             if(Input.GetAxis("Fire2") > 0)
             {
                 Reloading = true;
+				anim.SetTrigger("Reload");
 			}
         }
         //If the gun is reloading

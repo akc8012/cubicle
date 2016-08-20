@@ -12,8 +12,6 @@ public class Movement : MonoBehaviour
 	float moveSpeed = 10;            // what to increment velocity by
 	float maxVel = 5;       // maximum velocity in any direction
 	float rotSmooth = 20;    // smoothing on the lerp to rotate towards stick direction
-	bool walking = false;
-	bool crouching = false;
 
 	void Start()
 	{
@@ -25,6 +23,9 @@ public class Movement : MonoBehaviour
 	void Update()
 	{
 		if (!controller.enabled) return;
+
+		if (Input.GetButton("Fire2"))
+			anim.SetTrigger("Reload");
 
 		float speed = 0.0f;
 		Vector3 moveDir = GetInput(ref speed);
