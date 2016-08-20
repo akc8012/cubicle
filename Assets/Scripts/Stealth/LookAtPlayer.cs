@@ -21,6 +21,7 @@ public class LookAtPlayer : MonoBehaviour
 	Vector3 goToTarget;
 	bool goToTargetSet = false;
 	float startY;
+	AudioSource audioSource;
 
 	enum States { Searching, GoTowards, ForceGoTowards, GoBack };
 	States state;
@@ -34,6 +35,7 @@ public class LookAtPlayer : MonoBehaviour
 		possibleTime = -1;
 		comeAtTimer = -1;
 		startY = transform.position.y;
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -50,7 +52,7 @@ public class LookAtPlayer : MonoBehaviour
 				{
 					state = States.GoBack;
 					goToTargetSet = false;
-					
+
 					if (target == player.position && GameObject.FindWithTag("Player").GetComponent<Movement>().CanGet())
 					{
 						GameObject.FindWithTag("Canvas").GetComponent<ScreenFade>().FIAD();
@@ -163,6 +165,7 @@ public class LookAtPlayer : MonoBehaviour
 
 		state = States.GoTowards;
 		comeAtTimer = Time.timeSinceLevelLoad;
+		audioSource.Play();
 	}
 
 	public void SetGoToTarget(Vector3 target)

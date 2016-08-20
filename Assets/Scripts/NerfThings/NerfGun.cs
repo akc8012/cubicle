@@ -75,7 +75,7 @@ public class NerfGun : MonoBehaviour
         if (!hasFired && !Input.GetButton("Stealth"))
         {
             ReloadTimer = 1f;                //Set the reloading timer to 1 seconds every frame the HasFired is false
-			if (Input.GetButtonDown("Fire1"))     // GetAxis
+			if (Input.GetAxis("Fire1") > 0)
 			{
                 Fire();
             }

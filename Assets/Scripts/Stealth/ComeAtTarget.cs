@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ComeAtTarget : MonoBehaviour
 {
-	public float goToSpeed = 0.5f;
+	float goToSpeed = 0.08f;
 
 	Vector3 target;
 	CharacterController controller;
@@ -22,7 +22,7 @@ public class ComeAtTarget : MonoBehaviour
 		transform.rotation = rot;
 		controller.Move(transform.forward * goToSpeed);
 
-		if (Vector3.Distance(target, transform.position) < 1.5f)
+		if (Vector3.Distance(target, transform.position) < 1)
 		{
 			return true;
 		}
