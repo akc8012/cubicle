@@ -146,18 +146,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!1 &279213266
+--- !u!1 &165608447
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 279213271}
-  - 20: {fileID: 279213270}
-  - 92: {fileID: 279213269}
-  - 124: {fileID: 279213268}
-  - 81: {fileID: 279213267}
+  - 4: {fileID: 165608452}
+  - 20: {fileID: 165608451}
+  - 92: {fileID: 165608450}
+  - 124: {fileID: 165608449}
+  - 81: {fileID: 165608448}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -165,33 +165,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &279213267
+--- !u!81 &165608448
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 279213266}
+  m_GameObject: {fileID: 165608447}
   m_Enabled: 1
---- !u!124 &279213268
+--- !u!124 &165608449
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 279213266}
+  m_GameObject: {fileID: 165608447}
   m_Enabled: 1
---- !u!92 &279213269
+--- !u!92 &165608450
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 279213266}
+  m_GameObject: {fileID: 165608447}
   m_Enabled: 1
---- !u!20 &279213270
+--- !u!20 &165608451
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 279213266}
+  m_GameObject: {fileID: 165608447}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -220,14 +220,14 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!4 &279213271
+--- !u!4 &165608452
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 279213266}
-  m_LocalRotation: {x: 0.45632163, y: 0, z: 0, w: 0.8898149}
-  m_LocalPosition: {x: 4.4, y: 5.81, z: -1.4}
+  m_GameObject: {fileID: 165608447}
+  m_LocalRotation: {x: 0.70587164, y: 0, z: 0, w: 0.70833975}
+  m_LocalPosition: {x: 4.4, y: 9.93, z: 4.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -287,6 +287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emptyTile: {fileID: 0}
+  Cube2Wall: {fileID: 0}
+  Cube2WallCorner: {fileID: 0}
+  Cube3Wall: {fileID: 0}
+  Cube4Wall: {fileID: 0}
+  CubeLeft: {fileID: 0}
 --- !u!4 &1296382576
 Transform:
   m_ObjectHideFlags: 0
