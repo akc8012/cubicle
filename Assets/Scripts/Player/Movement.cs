@@ -12,12 +12,15 @@ public class Movement : MonoBehaviour
 	float moveSpeed = 10;            // what to increment velocity by
 	float maxVel = 5;       // maximum velocity in any direction
 	float rotSmooth = 20;    // smoothing on the lerp to rotate towards stick direction
+	Vector3 startPos;
+	Quaternion startRot;
 
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
 		SetCam(GameObject.FindWithTag("MainCamera").transform);
 		anim = GetComponentInChildren<Animator>();
+		startPos = transform.position;
 	}
 
 	void Update()
@@ -89,5 +92,21 @@ public class Movement : MonoBehaviour
 	public void SetMovement(bool enable)
 	{
 		controller.enabled = enable;
+		if (!enable)
+		{
+			anim.SetFloat("Walking", 0);
+		}
+	}
+
+	public void Reset()
+	{
+		transform.position = startPos;
+		transform.rotation = startRot;
+	}
+
+	public void NextLevel()
+	{
+		startPos = transform.position;
+		startRot = transform.rotation;
 	}
 }
