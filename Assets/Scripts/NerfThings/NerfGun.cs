@@ -49,7 +49,7 @@ public class NerfGun : MonoBehaviour
 
 	void Update()
 	{
-        position = this.transform.position;
+		position = this.transform.position;
         rotation = this.transform.rotation;
 
         //Small FSM for the different states of the gun for upgrades.
@@ -72,8 +72,8 @@ public class NerfGun : MonoBehaviour
         {
            
             ReloadTimer = 3f;                //Set the reloading timer to 3 seconds every frame the HasFired is false
-            if (Input.GetKeyDown(KeyCode.T))
-            {
+			if (Input.GetAxis("Fire1") > 0)
+			{
                 Fire();
             }
         }
@@ -81,10 +81,10 @@ public class NerfGun : MonoBehaviour
         //If the gun has been fired
         if(HasFired)
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetAxis("Fire2") > 0)
             {
                 Reloading = true;
-            }
+			}
         }
         //If the gun is reloading
         if(Reloading)
