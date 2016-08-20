@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: HasGunMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Hips
+    m_Weight: 0
+  - m_Path: Hips/L_Thigh
+    m_Weight: 0
+  - m_Path: Hips/L_Thigh/L_Calf
+    m_Weight: 0
+  - m_Path: Hips/L_Thigh/L_Calf/L_Foot
+    m_Weight: 0
+  - m_Path: Hips/L_Thigh/L_Calf/L_Foot/L_Toe
+    m_Weight: 0
+  - m_Path: Hips/L_Thigh/L_Calf/L_Foot/L_Toe/L_Toe_BE
+    m_Weight: 0
+  - m_Path: Hips/R_Thigh
+    m_Weight: 0
+  - m_Path: Hips/R_Thigh/R_Calf
+    m_Weight: 0
+  - m_Path: Hips/R_Thigh/R_Calf/R_Foot
+    m_Weight: 0
+  - m_Path: Hips/R_Thigh/R_Calf/R_Foot/R_Toe
+    m_Weight: 0
+  - m_Path: Hips/R_Thigh/R_Calf/R_Foot/R_Toe/R_Toe_BE
+    m_Weight: 0
+  - m_Path: Hips/Spine01
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Fingers01
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Fingers01/L_Fingers02
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Fingers01/L_Fingers02/L_Fingers_End
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Thumb01
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Thumb01/L_Thumb02
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/L_UpperArm/L_Forearm/L_Wrist/L_Hand/L_Thumb01/L_Thumb02/L_Thumb_End
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/Neck
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/Neck/Head
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/Neck/Head/Character_Visor
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/Neck/Head/Head_End
+    m_Weight: 0
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Fingers01
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Fingers01/R_Fingers02
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Fingers01/R_Fingers02/R_Fingers_End
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Thumb01
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Thumb01/R_Thumb02
+    m_Weight: 1
+  - m_Path: Hips/Spine01/Spine02/Spine03/Chest/R_UpperArm/R_Forearm/R_Wrist/R_Hand/R_Thumb01/R_Thumb02/R_Thumb_End
+    m_Weight: 1
+  - m_Path: polySurface2
+    m_Weight: 1

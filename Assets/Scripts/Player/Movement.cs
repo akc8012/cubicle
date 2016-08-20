@@ -6,18 +6,20 @@ public class Movement : MonoBehaviour
 {
 	CharacterController controller;
 	Transform cam;
-	//Animator anim;
+	Animator anim;
 
 	Vector3 velocity = Vector3.zero;
 	float moveSpeed = 10;            // what to increment velocity by
 	float maxVel = 5;       // maximum velocity in any direction
 	float rotSmooth = 20;    // smoothing on the lerp to rotate towards stick direction
+	bool walking = false;
+	bool crouching = false;
 
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
 		SetCam(GameObject.FindWithTag("MainCamera").transform);
-		//anim = GetComponentInChildren<Animator>();
+		anim = GetComponentInChildren<Animator>();
 	}
 
 	void Update()
@@ -44,6 +46,9 @@ public class Movement : MonoBehaviour
 
 		speed = Mathf.Clamp(Vector3.Magnitude(stickDir), 0, 1);     // make sure we can't exceed 1 (diagonals)
 
+		anim.SetFloat("Walking", speed);
+		anim.SetBool("Crouching", Input.GetButton("Stealth"));
+		
 		// get camera rotation
 		Vector3 cameraDir = cam.forward;
 		cameraDir.y = 0.0f;                 // cameraDir is the camera's forward vector, with the y removed

@@ -20,15 +20,15 @@ public class StealthFlop : MonoBehaviour
 
 		if (Input.GetButton("Stealth"))
 		{
-			newPos = new Vector3(transform.position.x, -dist, transform.position.z);
+			//newPos = new Vector3(transform.position.x, -dist, transform.position.z);
 			zoomCam.ZoomOut();
 		}
 		else
 		{
-			newPos = new Vector3(transform.position.x, startY, transform.position.z);
+			//newPos = new Vector3(transform.position.x, startY, transform.position.z);
 			zoomCam.ZoomIn();
 		}
 
-		transform.position = newPos;
+		//transform.position = newPos;
 	}
 }
