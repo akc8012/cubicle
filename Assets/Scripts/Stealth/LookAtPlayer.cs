@@ -7,31 +7,55 @@ public class LookAtPlayer : MonoBehaviour
 {
 	public float rayY = 0.6f;
 	public float turningSpeed = 12;
+	public ComeAtTarget comeAtTarget;
 
 	Transform player;
+	Collider col;
 	List<Ray> whiskers = new List<Ray>();
+	Vector3 postPos;
 	bool found = false;
-	float possibleTime = -1;
-	float lookAtTime = 0.5f;	// timer must reach
+	float possibleTime;
+	float lookAtTime = 0.5f;    // timer must reach
+	float comeAtTimer;
 
-	enum States { Searching, GoTowards };
+	enum States { Searching, GoTowards, GoBack };
 	States state;
 
 	void Start()
 	{
+		postPos = transform.position;
 		player = GameObject.FindWithTag("Player").transform;
+		col = GetComponent<Collider>();
 		state = States.Searching;
+		possibleTime = -1;
+		comeAtTimer = -1;
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P))
-			state = States.Searching;
-
 		if (state == States.Searching)
 			Search();
 		if (state == States.GoTowards)
-			GoForth();
+		{
+			if (comeAtTimer != -1 && Time.timeSinceLevelLoad - comeAtTimer < 3)
+			{
+				if (comeAtTarget.ComeAt())
+					state = States.GoBack;
+			}
+			else
+			{
+				state = States.GoBack;
+				col.enabled = false;
+			}
+		}
+		if (state == States.GoBack)
+		{
+			if (comeAtTarget.ToPost(postPos))
+			{
+				state = States.Searching;
+				col.enabled = true;
+			}
+		}
 	}
 
 	void Search()
@@ -66,9 +90,7 @@ public class LookAtPlayer : MonoBehaviour
 
 		if (possibleTime != -1 && Time.timeSinceLevelLoad - possibleTime > lookAtTime)
 		{
-			state = States.GoTowards;
 			possibleTime = -1;
-			print("found");
 			StartCoroutine(QuickLookAt());
 		}
 	}
@@ -107,13 +129,10 @@ public class LookAtPlayer : MonoBehaviour
 			rot = Quaternion.LookRotation(dirVector);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * turningSpeed);
-			print("turning");
 			yield return null;
 		}
-	}
 
-	void GoForth()
-	{
-		//state = States.Searching;
+		state = States.GoTowards;
+		comeAtTimer = Time.timeSinceLevelLoad;
 	}
 }
