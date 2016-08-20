@@ -13,6 +13,7 @@ public class LookAtPlayer : MonoBehaviour
 	Collider col;
 	List<Ray> whiskers = new List<Ray>();
 	Vector3 postPos;
+	public Animator anim;
 	bool found = false;
 	float possibleTime;
 	float lookAtTime = 0.5f;    // timer must reach
@@ -64,10 +65,16 @@ public class LookAtPlayer : MonoBehaviour
 			{
 				state = States.Searching;
 				col.enabled = true;
+				anim.SetFloat("Walk", 0);
 			}
 		}
 
 		transform.position = new Vector3(transform.position.x, startY, transform.position.z);
+
+		if (state == States.GoTowards || state == States.ForceGoTowards || state == States.GoBack)
+			anim.SetFloat("Walk", 1);
+		else
+			anim.SetFloat("Walk", 0);
 	}
 
 	void Search()
