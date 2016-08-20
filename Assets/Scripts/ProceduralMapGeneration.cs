@@ -31,7 +31,10 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 		CubeEmptyProps1, CubeEmptyProps2,
 		CubeEmptyProps3, CubeEmptyProps4,
-		CubeEmptyProps5;
+		CubeEmptyProps5, CubeEmptyProps6,
+
+		Cube2WallCornerProps1, Cube2WallCornerProps2,
+		Cube2WallCornerProps3, Cube2WallCornerProps4;
 
 	void Start()
 	{
@@ -81,6 +84,12 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeEmptyProps3 	= Resources.Load ("_prefabs/CubeEmptyProps3") as GameObject;
 		CubeEmptyProps4 	= Resources.Load ("_prefabs/CubeEmptyProps4") as GameObject;
 		CubeEmptyProps5 	= Resources.Load ("_prefabs/CubeEmptyProps5") as GameObject;
+		CubeEmptyProps6 	= Resources.Load ("_prefabs/CubeEmptyProps6") as GameObject;
+
+		Cube2WallCornerProps1 	= Resources.Load ("_prefabs/Cube2WallCornerProps1") as GameObject;
+		Cube2WallCornerProps2 	= Resources.Load ("_prefabs/Cube2WallCornerProps2") as GameObject;
+		Cube2WallCornerProps3 	= Resources.Load ("_prefabs/Cube2WallCornerProps3") as GameObject;
+		Cube2WallCornerProps4 	= Resources.Load ("_prefabs/Cube2WallCornerProps4") as GameObject;
 	}
 		
 	void CreateBasicTileLayout(){
@@ -265,17 +274,20 @@ public class ProceduralMapGeneration : MonoBehaviour
 						if(randCase >= 0 && randCase < 10)
 							ReplaceCell (i, j, CubeEmptyProps1, tileSize.x, tileSize.y, randRotation);
 						
-						if(randCase >= 10 && randCase < 20)
+						if(randCase >= 10 && randCase < 14)
 							ReplaceCell (i, j, CubeEmptyProps2, tileSize.x, tileSize.y, randRotation);
 
-						if(randCase >= 20 && randCase < 30)
+						if(randCase >= 14 && randCase < 24)
 							ReplaceCell (i, j, CubeEmptyProps3, tileSize.x, tileSize.y, randRotation);
 
-						if(randCase >= 30 && randCase < 40)
+						if(randCase >= 24 && randCase < 32)
 							ReplaceCell (i, j, CubeEmptyProps4, tileSize.x, tileSize.y, randRotation);
 
-						if(randCase >= 40 && randCase < 50)
+						if(randCase >= 32 && randCase < 40)
 							ReplaceCell (i, j, CubeEmptyProps5, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 40 && randCase < 50)
+							ReplaceCell (i, j, CubeEmptyProps6, tileSize.x, tileSize.y, randRotation);
 
 						if(randCase >= 50 && randCase < 70)
 							ReplaceCell (i, j, Cube3Wall, tileSize.x, tileSize.y, randRotation);
@@ -420,16 +432,60 @@ public class ProceduralMapGeneration : MonoBehaviour
 					if ((i == 1 || j == 1 || i == floorSize.y - 2 || j == floorSize.y - 2)) {
 
 						if (i == 1 && j == 1) {
-							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
+							int randCase = Random.Range (0, 100);
+
+							if(randCase >= 0 && randCase < 10)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+							if(randCase >= 10 && randCase < 20)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+							if(randCase >= 20 && randCase < 30)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+							if(randCase >= 30 && randCase < 40)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 180);
+							if(randCase >= 40 && randCase < 100)
+								ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
 						}
 						if (i == 1 && j == floorSize.y - 2) {
-							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 270);
+							int randCase = Random.Range (0, 100);
+
+							if(randCase >= 0 && randCase < 10)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 270);
+							if(randCase >= 10 && randCase < 20)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 270);
+							if(randCase >= 20 && randCase < 30)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 270);
+							if(randCase >= 30 && randCase < 40)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 270);
+							if(randCase >= 40 && randCase < 100)
+								ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 270);
 						}
 						if (i == floorSize.y - 2 && j == 1) {
-							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 90);
+							int randCase = Random.Range (0, 100);
+
+							if(randCase >= 0 && randCase < 10)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 90);
+							if(randCase >= 10 && randCase < 20)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 90);
+							if(randCase >= 20 && randCase < 30)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 90);
+							if(randCase >= 30 && randCase < 40)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 90);
+							if(randCase >= 40 && randCase < 100)
+								ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 90);
 						}
 						if (i == floorSize.y - 2 && j == floorSize.y - 2) {
-							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 0);
+							int randCase = Random.Range (0, 100);
+
+							if(randCase >= 0 && randCase < 10)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 0);
+							if(randCase >= 10 && randCase < 20)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 0);
+							if(randCase >= 20 && randCase < 30)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 0);
+							if(randCase >= 30 && randCase < 40)
+								ReplaceCell (i, j, Cube2WallCornerProps1, tileSize.x, tileSize.y, 0);
+							if(randCase >= 40 && randCase < 100)
+								ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 0);
 						}
 					}
 				}
