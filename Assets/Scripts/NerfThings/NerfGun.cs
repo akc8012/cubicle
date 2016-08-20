@@ -95,24 +95,24 @@ public class NerfGun : MonoBehaviour
         //THE POWERUPS RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH
         if (powerUp)
         {
-            GunPowerUp(1);
-            powerUpTimer = 4f;
+            GunPowerUp(1); 
             powerUpTimer -= Time.deltaTime;
             if(powerUpTimer <= 0)
             {
                 GunPowerUp(0);
                 powerUp = false;
+                powerUpTimer = 4f;
             }
         }
         if (powerUp2)
         {
             GunPowerUp(2);
-            powerUpTimer = 4f;
             powerUpTimer -= Time.deltaTime;
             if(powerUpTimer <= 0)
             {
                 GunPowerUp(0);
                 powerUp2 = false;
+                powerUpTimer = 4f;
             }
         }
         //------------------------------------------------------------------//
