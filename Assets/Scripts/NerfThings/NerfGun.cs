@@ -8,6 +8,8 @@ public class NerfGun : MonoBehaviour
     public GameObject nerfBullet;   //Get the prefab for the nerf bullets
     private GameObject bulletSpawnPoint; //Get the spawn point which is child of this object
 
+    public AudioSource sound;
+
     private float bulletForce;       //The force the projectile will have
 
     private bool hasFired;    //Flag for if the gun has fired
@@ -44,6 +46,8 @@ public class NerfGun : MonoBehaviour
         Reloading = false;                  //Set Reloading to false at the beginning of the game
 
 		powerUpTimer = 4f;
+
+        sound = GetComponent<AudioSource>();
     }
 
 
@@ -154,7 +158,8 @@ public class NerfGun : MonoBehaviour
         bulletRb.AddForce(transform.forward * BulletForce);
 
         HasFired = true;
-        
+
+        sound.Play();
     }
 
     //Reloads the nerf gun when given the proper input
