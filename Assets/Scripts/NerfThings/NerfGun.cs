@@ -15,6 +15,10 @@ public class NerfGun : MonoBehaviour
 
     private float reloadTimer;     //The timer dedicated to reloading
 
+    public bool powerUp;  //The flag that tells us if we are super saiyan
+    public bool powerUp2;   //The flag that tells us if we are super saiyan 2
+    public float powerUpTimer;  //The timer for power up
+
     public Vector3 position;         //The gun position
     public Quaternion rotation;      //The gun rotation
 
@@ -33,7 +37,7 @@ public class NerfGun : MonoBehaviour
         //Find the bullet spawn point
         bulletSpawnPoint = GameObject.Find("BulletSpawnPoint");
         //Set the Gun's state to the default
-        GunPowerUp(1);
+        GunPowerUp(0);
 
         HasFired = false;                   //Set HasFired to false at the beginning of the game
         ReloadTimer = 3f;                    //Set the reload timer to 3 seconds
@@ -80,11 +84,34 @@ public class NerfGun : MonoBehaviour
                 Reloading = true;
             }
         }
+        //If the gun is reloading
         if(Reloading)
         {
             Reload();
         }
 
+        //THE POWERUPS RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH
+        if (powerUp)
+        {
+            GunPowerUp(1);
+            powerUpTimer -= Time.deltaTime;
+            if(powerUpTimer <= 0)
+            {
+                GunPowerUp(0);
+                powerUp = false;
+            }
+        }
+        if (powerUp2)
+        {
+            GunPowerUp(2);
+            powerUpTimer -= Time.deltaTime;
+            if(powerUpTimer <= 0)
+            {
+                GunPowerUp(0);
+                powerUp2 = false;
+            }
+        }
+        //------------------------------------------------------------------//
     }
 
     //Switches the gun between the different upgrades states
