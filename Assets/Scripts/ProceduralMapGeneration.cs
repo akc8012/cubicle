@@ -24,7 +24,10 @@ public class ProceduralMapGeneration : MonoBehaviour
 		Cube3Wall,  Cube4Wall,  CubeTEST,
 		CubeLeftShort, CubeLeftTall, CubeLeftDoor,
 
-		CubeLeftShortProps1;
+		CubeLeftShortProps1, CubeLeftShortProps2,
+		CubeLeftShortProps3, CubeLeftShortProps4,
+		CubeLeftShortProps5, CubeLeftShortProps6,
+		CubeLeftShortProps7;
 
 	void Start()
 	{
@@ -62,6 +65,12 @@ public class ProceduralMapGeneration : MonoBehaviour
 		Cube4Wall 			= Resources.Load ("GenericModules/Cube4Wall") as GameObject;
 
 		CubeLeftShortProps1 = Resources.Load ("_prefabs/CubeLeftShortProps1") as GameObject;
+		CubeLeftShortProps2 = Resources.Load ("_prefabs/CubeLeftShortProps2") as GameObject;
+		CubeLeftShortProps3 = Resources.Load ("_prefabs/CubeLeftShortProps3") as GameObject;
+		CubeLeftShortProps4 = Resources.Load ("_prefabs/CubeLeftShortProps4") as GameObject;
+		CubeLeftShortProps5 = Resources.Load ("_prefabs/CubeLeftShortProps5") as GameObject;
+		CubeLeftShortProps6 = Resources.Load ("_prefabs/CubeLeftShortProps6") as GameObject;
+		CubeLeftShortProps7 = Resources.Load ("_prefabs/CubeLeftShortProps7") as GameObject;
 	}
 		
 	void CreateBasicTileLayout(){
@@ -193,7 +202,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 		for (int i = 0; i < floorSize.x; i++) {
 			for (int j = 0; j < floorSize.y; j++) {
 				if (!mapTile [i, j].GetVisited ()) {
-					
+
+					#region boundary walls
 					if (i == 0 || j == 0 || i == floorSize.y - 1 || j == floorSize.y - 1 || i == 2 || j == 2 || i == 7 || j == 7) {
 						
 						if (i == 0) {
@@ -258,6 +268,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 						tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 0.1f, tileSize.y);
 						tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
 					}
+
+					#endregion
 				}
 			}
 		}
@@ -265,8 +277,58 @@ public class ProceduralMapGeneration : MonoBehaviour
 		for (int i = 1; i < floorSize.x-3; i++) {
 			if (!mapTile [i, 1].GetVisited () && !mapTile [i, (int)(scaleSize - 2)].GetVisited ()) {
 				if (i != 2 && i != scaleSize - 2) {
-					ReplaceCell (i, 1, CubeLeftShort, tileSize.x, tileSize.y, 270);
-					ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps1, tileSize.x, tileSize.y, 90);
+
+					int rand = Random.Range (0, 7);
+
+					switch (rand) {
+					case 0:
+						ReplaceCell (i, 1, CubeLeftShortProps1, tileSize.x, tileSize.y, 270);
+						break;
+					case 1:
+						ReplaceCell (i, 1, CubeLeftShortProps2, tileSize.x, tileSize.y, 270);
+						break;
+					case 2:
+						ReplaceCell (i, 1, CubeLeftShortProps3, tileSize.x, tileSize.y, 270);
+						break;
+					case 3:
+						ReplaceCell (i, 1, CubeLeftShortProps4, tileSize.x, tileSize.y, 270);
+						break;
+					case 4:
+						ReplaceCell (i, 1, CubeLeftShortProps5, tileSize.x, tileSize.y, 270);
+						break;
+					case 5:
+						ReplaceCell (i, 1, CubeLeftShortProps6, tileSize.x, tileSize.y, 270);
+						break;
+					case 6:
+						ReplaceCell (i, 1, CubeLeftShortProps7, tileSize.x, tileSize.y, 270);
+						break;
+					}
+
+					rand = Random.Range (0, 7);
+
+					switch (rand) {
+					case 0:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps1, tileSize.x, tileSize.y, 90);
+						break;
+					case 1:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps2, tileSize.x, tileSize.y, 90);
+						break;
+					case 2:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps3, tileSize.x, tileSize.y, 90);
+						break;
+					case 3:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps4, tileSize.x, tileSize.y, 90);
+						break;
+					case 4:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps5, tileSize.x, tileSize.y, 90);
+						break;
+					case 5:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps6, tileSize.x, tileSize.y, 90);
+						break;
+					case 6:
+						ReplaceCell (i, (int)(floorSize.y - 2), CubeLeftShortProps7, tileSize.x, tileSize.y, 90);
+						break;
+					}
 				}
 			}
 		}
@@ -274,8 +336,58 @@ public class ProceduralMapGeneration : MonoBehaviour
 		for (int j = 1; j < floorSize.y-3; j++) {
 			if (!mapTile [1, j].GetVisited () && !mapTile [(int)(scaleSize - 2),j].GetVisited ()) {
 				if (j != 2 && j != scaleSize - 2) {
-					ReplaceCell (1, j, CubeLeftShort, tileSize.x, tileSize.y, 0);
-					ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShort, tileSize.x, tileSize.y, 180);
+
+					int rand = Random.Range (0, 7);
+
+					switch (rand) {
+					case 0:
+						ReplaceCell (1, j, CubeLeftShortProps1, tileSize.x, tileSize.y, 0);
+						break;
+					case 1:
+						ReplaceCell (1, j, CubeLeftShortProps2, tileSize.x, tileSize.y, 0);
+						break;
+					case 2:
+						ReplaceCell (1, j, CubeLeftShortProps3, tileSize.x, tileSize.y, 0);
+						break;
+					case 3:
+						ReplaceCell (1, j, CubeLeftShortProps4, tileSize.x, tileSize.y, 0);
+						break;
+					case 4:
+						ReplaceCell (1, j, CubeLeftShortProps5, tileSize.x, tileSize.y, 0);
+						break;
+					case 5:
+						ReplaceCell (1, j, CubeLeftShortProps6, tileSize.x, tileSize.y, 0);
+						break;
+					case 6:
+						ReplaceCell (1, j, CubeLeftShortProps7, tileSize.x, tileSize.y, 0);
+						break;
+					}
+
+					rand = Random.Range (0, 7);
+
+					switch (rand) {
+					case 0:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 1:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 2:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 3:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 4:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 5:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					case 6:
+						ReplaceCell ((int)(floorSize.y - 2), j, CubeLeftShortProps1, tileSize.x, tileSize.y, 180);
+						break;
+					}
 				}
 			}
 		}
