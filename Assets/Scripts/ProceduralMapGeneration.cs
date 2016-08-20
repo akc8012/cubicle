@@ -16,7 +16,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 	int scaleSize = 10;
 	Vector2 floorSize;
 	Vector2 tileSize = new Vector2(0.1f,0.1f); 	// width, length
-	MapTile mapTile;
+	MapTile[,] mapTile;
 
 	GameObject[,] tiles;
 	public GameObject emptyTile, Cube2Wall, Cube2WallCorner, Cube3Wall, Cube4Wall;
@@ -28,6 +28,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 		FindAssets ();
 		CreateBasicTileLayout ();
 		DefineStartEnd ();
+		FillGrid ();
 	}
 
 	void Update()
@@ -37,6 +38,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 	void Initialize(){
 
+		mapTile = new MapTile[scaleSize, scaleSize];
 		tiles = new GameObject[scaleSize, scaleSize];
 		floorSize = new Vector2(scaleSize,scaleSize);	// width, length - always square
 	}
@@ -58,7 +60,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 				tiles[i,j] = (GameObject)Instantiate (emptyTile, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
 				tiles[i,j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
 				tiles[i,j].transform.parent = GameObject.Find ("MapTiles").transform;
-				mapTile = new MapTile (new Vector2(tiles[i,j].transform.position.x, tiles[i,j].transform.position.z), false);
+				mapTile[i,j] = new MapTile (new Vector2(tiles[i,j].transform.position.x, tiles[i,j].transform.position.z), false);
 			}
 	}
 
@@ -80,7 +82,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 			// Delete emptyTile at (floorSize.x - rand, floorSize.y)
 			// Place start tile
 			// Rotate North
-			mapTile.SetVisited (true);
+			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
+			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
 			break;
 		case 1:
 			randStart = (int)Random.Range (floorSize.x/2, floorSize.x);
@@ -93,7 +96,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 			// Delete emptyTile at (floorSize.x - rand, floorSize.y)
 			// Place start tile
 			// Rotate North
-			mapTile.SetVisited (true);
+			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
+			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
 			break;
 		case 2:
 			randStart = (int)Random.Range (0, floorSize.y/2);
@@ -106,7 +110,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 			// Delete emptyTile at (floorSize.x, floorSize.y - rand)
 			// Place start tile
 			// Rotate West
-			mapTile.SetVisited (true);
+			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
+			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
 			break;
 		case 3:
 			randStart = (int)Random.Range (floorSize.y/2, floorSize.x/2);
@@ -119,7 +124,8 @@ public class ProceduralMapGeneration : MonoBehaviour
 			// Delete emptyTile at (floorSize.x, floorSize.y - rand)
 			// Place start tile
 			// Rotate West
-			mapTile.SetVisited (true);
+			mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
+			mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
 			break;
 		}
 
@@ -163,22 +169,62 @@ public class ProceduralMapGeneration : MonoBehaviour
 		for (int h = 0; h < lengths[0]; h++) {
 			
 			tiles[(int)colorShift + h + 1, (int)start.y].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+			mapTile [(int)colorShift + h + 1, (int)start.y].SetVisited (true);
 		}
 		for (int h = 0; h < lengths[1] -1; h++) {
 
 			tiles[(int)end.x - h - 1, (int)end.y].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+			mapTile [(int)end.x - h - 1, (int)end.y].SetVisited (true);
 		}
 
 		// Color start and end
 		tiles[(int)start.x,(int)start.y].GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
-   		tiles[(int)end.x,(int)end.y].GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+		mapTile[(int)start.x,(int)start.y].SetVisited (true);
+		tiles[(int)end.x,(int)end.y].GetComponent<Renderer>().material.SetColor("_Color", Color.blue);
+		mapTile [(int)end.x, (int)end.y].SetVisited (true);
 
 		for (int h = 0; h < Mathf.Abs(start.y - end.y); h++) {
 
-			if(start.y - end.y < 0)	//	if negative, Start is above End
-				tiles[(int)cutPoint, (int)start.y + h].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-			else if(start.y - end.y > 0)	
-				tiles[(int)cutPoint, (int)start.y - h].GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+			if (start.y - end.y < 0) {	//	if negative, Start is above End
+				tiles [(int)cutPoint, (int)start.y + h].GetComponent<Renderer> ().material.SetColor ("_Color", Color.red);
+				mapTile [(int)cutPoint, (int)start.y + h].SetVisited (true);
+			} 
+			else if (start.y - end.y > 0) {	
+				tiles [(int)cutPoint, (int)start.y - h].GetComponent<Renderer> ().material.SetColor ("_Color", Color.red);
+				mapTile [(int)cutPoint, (int)start.y - h].SetVisited (true);
+			}
 		}
+	}
+
+	void FillGrid(){
+		
+		for (int i = 0; i < floorSize.x; i++)
+			for (int j = 0; j < floorSize.y; j++) {
+
+				if (!mapTile [i, j].GetVisited ()) {
+					int rand = Random.Range (0, 4);
+					switch (rand) {
+					case 0:
+						Destroy (tiles [i, j].gameObject);
+						tiles[i,j] = (GameObject)Instantiate (Cube2Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
+						break;
+					case 1:
+						Destroy (tiles [i, j].gameObject);
+						tiles[i,j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
+						break;
+					case 2:
+						Destroy (tiles [i, j].gameObject);
+						tiles[i,j] = (GameObject)Instantiate (Cube3Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
+						break;
+					case 3:
+						Destroy (tiles [i, j].gameObject);
+						tiles[i,j] = (GameObject)Instantiate (Cube4Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
+						break;
+					}
+
+					tiles[i,j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
+					tiles[i,j].transform.parent = GameObject.Find ("MapTiles").transform;
+				}
+			}
 	}
 }
