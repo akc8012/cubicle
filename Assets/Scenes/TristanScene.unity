@@ -292,6 +292,7 @@ MonoBehaviour:
   Cube3Wall: {fileID: 0}
   Cube4Wall: {fileID: 0}
   CubeLeft: {fileID: 0}
+  CubeTEST: {fileID: 0}
 --- !u!4 &1296382576
 Transform:
   m_ObjectHideFlags: 0

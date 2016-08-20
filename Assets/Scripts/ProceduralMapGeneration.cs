@@ -19,7 +19,13 @@ public class ProceduralMapGeneration : MonoBehaviour
 	MapTile[,] mapTile;
 
 	GameObject[,] tiles;
-	public GameObject emptyTile, Cube2Wall, Cube2WallCorner, Cube3Wall, Cube4Wall, CubeLeft;
+	public GameObject emptyTile, 
+		Cube2Wall, 
+		Cube2WallCorner, 
+		Cube3Wall, 
+		Cube4Wall, 
+		CubeLeft, 
+		CubeTEST;
 
 	void Start()
 	{
@@ -46,6 +52,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 	void FindAssets(){
 
 		emptyTile 		= Resources.Load ("_prefabs/GenericTile") as GameObject;
+		CubeTEST 		= Resources.Load ("_prefabs/CubeTEST") as GameObject;
 		CubeLeft 		= Resources.Load ("_prefabs/CubeLeft") as GameObject;
 		Cube2Wall 		= Resources.Load ("_prefabs/Cube2Wall") as GameObject;
 		Cube2WallCorner = Resources.Load ("_prefabs/Cube2WallCorner") as GameObject;
@@ -186,8 +193,47 @@ public class ProceduralMapGeneration : MonoBehaviour
 			for (int j = 0; j < floorSize.y; j++) {
 				if (!mapTile [i, j].GetVisited ()) {
 					
-					if (i != 0 && j != 0 && i != 9 && j != 9 && i != 2 && j != 2 && i != 7 && j != 7) {
-						Debug.Log (i + " : " + j);
+					if (i == 0 || j == 0 || i == floorSize.y - 1 || j == floorSize.y - 1 || i == 2 || j == 2 || i == 7 || j == 7) {
+						
+						if (i == 0) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
+						}
+						if (j == 0) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
+						}
+						if (j == floorSize.y - 1) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
+						}
+						if (i == floorSize.y - 1) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
+						}
+						if (i == 0 && i == 2) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
+						}
+						if (j == 0 && j == 2) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
+						}
+						if (j == floorSize.y - 1 && j == 7) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
+						}
+						if (i == floorSize.y - 1 && i == 7) {
+							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
+						}
+						if (i == 0 && j == 0) {
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 270);
+						}
+						if (i == 0 && j == floorSize.y - 1) {
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 0);
+						}
+						if (i == floorSize.y - 1 && j == 0) {
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
+						}
+						if (i == floorSize.y - 1 && j == floorSize.y - 1) {
+							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 90);
+						}
+
+					} else {
+
 						int rand = 1;//Random.Range (0, 3);
 						switch (rand) {
 						case 0:
@@ -210,49 +256,60 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 						tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 1, tileSize.y);
 						tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+					}
+				}
+			}
+		}
 
-					} else {
-						
+		for (int i = 1; i < floorSize.x-3; i++) {
+			if (!mapTile [i, 1].GetVisited () && !mapTile [i, (int)(scaleSize - 2)].GetVisited ()) {
+				if (i != 2 && i != scaleSize - 2) {
+					ReplaceCell (i, 1, CubeLeft, tileSize.x, tileSize.y, 270);
+					ReplaceCell (i, (int)(floorSize.y - 2), CubeLeft, tileSize.x, tileSize.y, 90);
+				}
+			}
+		}
 
-						if (i == 0) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
-						}
-						if (j == 0) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
-						}
-						if (j == 9) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
-						}
-						if (i == 9) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
-						}
-						if (i == 0 && i == 2) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 0);
-						}
-						if (j == 0 && j == 2) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 270);
-						}
-						if (j == 9 && j == 7) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 90);
-						}
-						if (i == 9 && i == 7) {
-							ReplaceCell (i, j, CubeLeft, tileSize.x, tileSize.y, 180);
-						}
-						if (i == 0 && j == 0) {
+		for (int j = 1; j < floorSize.y-3; j++) {
+			if (!mapTile [1, j].GetVisited () && !mapTile [(int)(scaleSize - 2),j].GetVisited ()) {
+				if (j != 2 && j != scaleSize - 2) {
+					ReplaceCell (1, j, CubeLeft, tileSize.x, tileSize.y, 0);
+					ReplaceCell ((int)(floorSize.y - 2), j, CubeLeft, tileSize.x, tileSize.y, 180);
+				}
+			}
+		}
+			
+		for (int i = 0; i < floorSize.x; i++) {
+			for (int j = 0; j < floorSize.y; j++) {
+				if (!mapTile [i, j].GetVisited ()) {
+
+					if ((i == 1 || j == 1 || i == floorSize.y - 2 || j == floorSize.y - 2)) {
+
+						if (i == 1 && j == 1) {
 							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 270);
 						}
-						if (i == 0 && j == 9) {
+						if (i == 1 && j == floorSize.y - 2) {
 							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 0);
 						}
-						if (i == 9 && j == 0) {
+						if (i == floorSize.y - 2 && j == 1) {
 							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 180);
 						}
-						if (i == 9 && j == 9) {
+						if (i == floorSize.y - 2 && j == floorSize.y - 2) {
 							ReplaceCell (i, j, Cube2WallCorner, tileSize.x, tileSize.y, 90);
 						}
 					}
 				}
 			}
+		}
+
+		if (!mapTile [(scaleSize/2)-1, (scaleSize/2)-1].GetVisited () && !mapTile [(scaleSize/2),(scaleSize/2)-1].GetVisited () &&
+			!mapTile [(scaleSize/2)-1, (scaleSize/2)].GetVisited () && !mapTile [(scaleSize/2),(scaleSize/2)].GetVisited ()) {
+
+			ReplaceCell ((int)(scaleSize/2)-1, (scaleSize/2)-1, CubeTEST, tileSize.x, tileSize.y, 0);
+			ReplaceCell ((int)(scaleSize/2), (scaleSize/2)-1, CubeTEST, tileSize.x, tileSize.y, 0);
+			ReplaceCell ((int)(scaleSize/2)-1, (scaleSize/2), CubeTEST, tileSize.x, tileSize.y, 0);
+			ReplaceCell ((int)(scaleSize/2), (scaleSize/2), CubeTEST, tileSize.x, tileSize.y, 0);
+
 		}
 	}
 
