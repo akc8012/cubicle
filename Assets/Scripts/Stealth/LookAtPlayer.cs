@@ -17,8 +17,11 @@ public class LookAtPlayer : MonoBehaviour
 	float possibleTime;
 	float lookAtTime = 0.5f;    // timer must reach
 	float comeAtTimer;
+	Vector3 goToTarget;
+	bool goToTargetSet = false;
+	float startY;
 
-	enum States { Searching, GoTowards, GoBack };
+	enum States { Searching, GoTowards, ForceGoTowards, GoBack };
 	States state;
 
 	void Start()
@@ -29,23 +32,30 @@ public class LookAtPlayer : MonoBehaviour
 		state = States.Searching;
 		possibleTime = -1;
 		comeAtTimer = -1;
+		startY = transform.position.y;
 	}
 
 	void Update()
 	{
 		if (state == States.Searching)
 			Search();
-		if (state == States.GoTowards)
+		if (state == States.GoTowards || state == States.ForceGoTowards)
 		{
-			if (comeAtTimer != -1 && Time.timeSinceLevelLoad - comeAtTimer < 3)
+			if (state == States.ForceGoTowards || comeAtTimer != -1 && Time.timeSinceLevelLoad - comeAtTimer < 3)
 			{
-				if (comeAtTarget.ComeAt())
+				Vector3 target = goToTargetSet ? goToTarget : player.position;
+
+				if (comeAtTarget.ComeAt(target))
+				{
 					state = States.GoBack;
+					goToTargetSet = false;
+				}
 			}
 			else
 			{
 				state = States.GoBack;
 				col.enabled = false;
+				goToTargetSet = false;
 			}
 		}
 		if (state == States.GoBack)
@@ -56,6 +66,8 @@ public class LookAtPlayer : MonoBehaviour
 				col.enabled = true;
 			}
 		}
+
+		transform.position = new Vector3(transform.position.x, startY, transform.position.z);
 	}
 
 	void Search()
@@ -134,5 +146,17 @@ public class LookAtPlayer : MonoBehaviour
 
 		state = States.GoTowards;
 		comeAtTimer = Time.timeSinceLevelLoad;
+	}
+
+	public void SetGoToTarget(Vector3 target)
+	{
+		if (Vector3.Distance(target, transform.position) < 10)
+		{
+			goToTarget = target;
+			goToTargetSet = true;
+			state = States.GoTowards;
+			comeAtTimer = Time.timeSinceLevelLoad;
+			StopAllCoroutines();
+		}
 	}
 }

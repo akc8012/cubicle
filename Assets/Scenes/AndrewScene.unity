@@ -261,6 +261,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+--- !u!1001 &345105196
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.9450346
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.32697043
+      objectReference: {fileID: 0}
+    - target: {fileID: 448366, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 113886, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+      propertyPath: m_Name
+      value: StealthMan (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c8a47cfb557946b419286e46d6c41bc0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &531897672 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100076, guid: 6cb27ad201d4cc941b2535c05b8f5d55, type: 3}

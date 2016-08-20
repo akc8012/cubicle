@@ -65,14 +65,15 @@ public class NerfGun : MonoBehaviour
                 BulletForce = 1500f;
                 break;
         }
-        //-------------------------------------------------------//
+		//-------------------------------------------------------//
 
-        //If the gun has not been fired
+		//If the gun has not been fired
+		hasFired = false;
         if (!hasFired)
         {
            
             ReloadTimer = 3f;                //Set the reloading timer to 3 seconds every frame the HasFired is false
-			if (Input.GetAxis("Fire1") > 0)
+			if (Input.GetButtonDown("Fire1"))     // GetAxis
 			{
                 Fire();
             }
