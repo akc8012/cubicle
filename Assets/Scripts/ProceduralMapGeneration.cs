@@ -27,7 +27,11 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeLeftShortProps1, CubeLeftShortProps2,
 		CubeLeftShortProps3, CubeLeftShortProps4,
 		CubeLeftShortProps5, CubeLeftShortProps6,
-		CubeLeftShortProps7;
+		CubeLeftShortProps7,
+
+		CubeEmptyProps1, CubeEmptyProps2,
+		CubeEmptyProps3, CubeEmptyProps4,
+		CubeEmptyProps5;
 
 	void Start()
 	{
@@ -71,6 +75,12 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeLeftShortProps5 = Resources.Load ("_prefabs/CubeLeftShortProps5") as GameObject;
 		CubeLeftShortProps6 = Resources.Load ("_prefabs/CubeLeftShortProps6") as GameObject;
 		CubeLeftShortProps7 = Resources.Load ("_prefabs/CubeLeftShortProps7") as GameObject;
+
+		CubeEmptyProps1 	= Resources.Load ("_prefabs/CubeEmptyProps1") as GameObject;
+		CubeEmptyProps2 	= Resources.Load ("_prefabs/CubeEmptyProps2") as GameObject;
+		CubeEmptyProps3 	= Resources.Load ("_prefabs/CubeEmptyProps3") as GameObject;
+		CubeEmptyProps4 	= Resources.Load ("_prefabs/CubeEmptyProps4") as GameObject;
+		CubeEmptyProps5 	= Resources.Load ("_prefabs/CubeEmptyProps5") as GameObject;
 	}
 		
 	void CreateBasicTileLayout(){
@@ -245,25 +255,36 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 					} else {
 
-						int rand = 1;//Random.Range (0, 3);
-						switch (rand) {
-						case 0:
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							break;
-						case 1:
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube4Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							break;
-						case 2:
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube3Wall, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							break;
-						case 3:
-							Destroy (tiles [i, j].gameObject);
-							tiles [i, j] = (GameObject)Instantiate (Cube2WallCorner, new Vector3 (i * tileSize.x * 10, 0, j * tileSize.y * 10), Quaternion.identity);
-							break;
-						}
+						int randCase = Random.Range (0, 100);
+						int randRotation = Random.Range (0, 4);
+						if(randRotation == 0) randRotation = 0;
+						if(randRotation == 1) randRotation = 90;
+						if(randRotation == 2) randRotation = 180;
+						if(randRotation == 3) randRotation = 270;
+
+						if(randCase >= 0 && randCase < 10)
+							ReplaceCell (i, j, CubeEmptyProps1, tileSize.x, tileSize.y, randRotation);
+						
+						if(randCase >= 10 && randCase < 20)
+							ReplaceCell (i, j, CubeEmptyProps2, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 20 && randCase < 30)
+							ReplaceCell (i, j, CubeEmptyProps3, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 30 && randCase < 40)
+							ReplaceCell (i, j, CubeEmptyProps4, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 40 && randCase < 50)
+							ReplaceCell (i, j, CubeEmptyProps5, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 50 && randCase < 70)
+							ReplaceCell (i, j, Cube3Wall, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 70 && randCase < 90)
+							ReplaceCell (i, j, Cube2Wall, tileSize.x, tileSize.y, randRotation);
+
+						if(randCase >= 90 && randCase < 100)
+							ReplaceCell (i, j, Cube4Wall, tileSize.x, tileSize.y, randRotation);
 
 						tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 0.1f, tileSize.y);
 						tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
