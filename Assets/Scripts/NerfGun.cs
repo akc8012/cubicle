@@ -8,9 +8,12 @@ public class NerfGun : MonoBehaviour
     public GameObject nerfBullet;   //Get the prefab for the nerf bullets
     private GameObject bulletSpawnPoint; //Get the spawn point which is child of this object
 
-    private int shotsPerSecond;     //How many nerfs can the gun fire per second
-    private float range;            //How far the gun can shoot a nerf in METERS
     public float bulletForce;       //The force the projectile will have
+
+    private bool hasFired;    //Flag for if the gun has fired
+    private bool reloading;       //Flag for if the gun is reloading
+
+    public float reloadTimer;     //The timer dedicated to reloading
 
     public Vector3 position;         //The gun position
     public Quaternion rotation;      //The gun rotation
@@ -18,7 +21,7 @@ public class NerfGun : MonoBehaviour
     //Upgrades or "Power Ups" for the gun
     enum States
     {
-        UPGRADE1 = 0,
+        UPGRADE1 = 0,   //Default
         UPGRADE2 = 1,
         UPGRADE3 = 2
     }
@@ -27,8 +30,14 @@ public class NerfGun : MonoBehaviour
 
     void Awake()
     {
+        //Find the bullet spawn point
         bulletSpawnPoint = GameObject.Find("BulletSpawnPoint");
+        //Set the Gun's state to the default
         GunPowerUp(0);
+
+        HasFired = false;                   //Set HasFired to false at the beginning of the game
+        reloadTimer = 3;                    //Set the reload timer to 3 seconds
+        reloading = false;                  //Set Reloading to false at the beginning of the game
     }
 
 	void Update()
@@ -40,23 +49,41 @@ public class NerfGun : MonoBehaviour
         switch(state)
         {
             case (States)0:
-                ShotsPerSecond = 5;
-                Range = 10f;
+                
                 break;
             case (States)1:
-                ShotsPerSecond = 7;
-                Range = 20f;
+
                 break;
             case (States)2:
-                ShotsPerSecond = 10;
-                Range = 30f;
+
                 break;
         }
         //-------------------------------------------------------//
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            Fire();
-	}
+        //If the gun has not been fired
+        if (!hasFired)
+        {
+            reloadTimer = 3f;                       //Set the reloading timer to 3 seconds every frame the HasFired is false
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Fire();
+            }
+        }
+
+        //If the gun has been fired
+        if(HasFired)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                reloading = true;
+            }
+        }
+        if(reloading)
+        {
+            Reload();
+        }
+
+    }
 
     //Switches the gun between the different upgrades states
     public void GunPowerUp(int x)
@@ -92,22 +119,34 @@ public class NerfGun : MonoBehaviour
         Rigidbody bulletRb;
         bulletRb = theBullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(transform.forward * bulletForce);
+
+        HasFired = true;
         
     }
 
-    #region Variable Helpers
-    //Set and Get the shotsPerSecond variable
-    public int ShotsPerSecond
+    //Reloads the nerf gun when given the proper input
+    public void Reload()
     {
-        set { shotsPerSecond = value; }
-        get { return shotsPerSecond; }
-    }
-    //Set and Get the range variable
-    public float Range
-    {
-        set { range = value; }
-        get { return range; }
+        reloadTimer -= Time.deltaTime;      //Count the reload timer down
+        if (reloadTimer <= 0)                //If the reload timer is less than or equal to 0, switch the flag for hasFired back to off
+        {
+            HasFired = false;           //Set the gun to a fire-able state
+            reloading = false;          //Gun is no longer reloading
+        }
     }
 
+
+    #region Variable Helper Functions
+    public bool HasFired
+    {
+        set { hasFired = value; }
+        get { return hasFired; }
+    }
+    public bool Reloading
+    {
+        set { reloading = value; }
+        get { return reloading; }
+    }
     #endregion
+
 }
