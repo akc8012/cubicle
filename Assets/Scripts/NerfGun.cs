@@ -6,12 +6,14 @@ public class NerfGun : MonoBehaviour
 {
 
     public GameObject nerfBullet;   //Get the prefab for the nerf bullets
+    private GameObject bulletSpawnPoint; //Get the spawn point which is child of this object
 
     private int shotsPerSecond;     //How many nerfs can the gun fire per second
     private float range;            //How far the gun can shoot a nerf in METERS
+    public float bulletForce;       //The force the projectile will have
 
     public Vector3 position;         //The gun position
-    public float distanceFromMuzzle; //So we can change the spawn location of the bullet on the fly
+    public Quaternion rotation;      //The gun rotation
 
     //Upgrades or "Power Ups" for the gun
     enum States
@@ -25,17 +27,14 @@ public class NerfGun : MonoBehaviour
 
     void Awake()
     {
+        bulletSpawnPoint = GameObject.Find("BulletSpawnPoint");
         GunPowerUp(0);
-    }
-
-    void Start()
-    {
-        Fire();
     }
 
 	void Update()
 	{
         position = this.transform.position;
+        rotation = this.transform.rotation;
 
         //Small FSM for the different states of the gun for upgrades.
         switch(state)
@@ -54,6 +53,9 @@ public class NerfGun : MonoBehaviour
                 break;
         }
         //-------------------------------------------------------//
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Fire();
 	}
 
     //Switches the gun between the different upgrades states
@@ -77,7 +79,20 @@ public class NerfGun : MonoBehaviour
     //Fires the gun when trigger is pulled
     public void Fire()
     {
-        Instantiate(nerfBullet, new Vector3(position.x, position.y, (transform.localPosition.z + distanceFromMuzzle)), Quaternion.identity);
+        //Shortcut for the bullet spawn point's location
+        Vector3 bulletPlace = bulletSpawnPoint.transform.position;
+        Quaternion bulletRot = bulletSpawnPoint.transform.rotation;
+
+        //Grab the bullet and instantiate it.  Fix the rotation.
+        GameObject theBullet;
+        theBullet = Instantiate(nerfBullet, bulletPlace, bulletRot) as GameObject;
+        //theBullet.transform.Rotate(Vector3.left * 90);
+
+        //Set the rigid body of the nerf bullet and then apply a forward force to it
+        Rigidbody bulletRb;
+        bulletRb = theBullet.GetComponent<Rigidbody>();
+        bulletRb.AddForce(transform.forward * bulletForce);
+        
     }
 
     #region Variable Helpers
