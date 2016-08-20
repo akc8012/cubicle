@@ -19,7 +19,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 	MapTile mapTile;
 
 	GameObject[,] tiles;
-	public GameObject emptyTile;
+	public GameObject emptyTile, Cube2Wall, Cube2WallCorner, Cube3Wall, Cube4Wall;
 
 	void Start()
 	{
@@ -43,7 +43,11 @@ public class ProceduralMapGeneration : MonoBehaviour
 
 	void FindAssets(){
 
-		emptyTile = Resources.Load ("_prefabs/GenericTile") as GameObject;
+		emptyTile 		= Resources.Load ("_prefabs/GenericTile") as GameObject;
+		Cube2Wall 		= Resources.Load ("_prefabs/Cube2Wall") as GameObject;
+		Cube2WallCorner = Resources.Load ("_prefabs/Cube2WallCorner") as GameObject;
+		Cube3Wall		= Resources.Load ("_prefabs/Cube3Wall") as GameObject;
+		Cube4Wall 		= Resources.Load ("_prefabs/Cube4Wall") as GameObject;
 	}
 		
 	void CreateBasicTileLayout(){
@@ -130,7 +134,6 @@ public class ProceduralMapGeneration : MonoBehaviour
 		int turnCount = 1;
 		int varyLength = Random.Range(0,scaleSize/3) + 1;
 		int previousLength = 0;
-		int maxLength = scaleSize / turnCount;
 		int cutPoint;
 
 		Debug.Log ("Number of turns: " + turnCount + " and Vary Length: " + varyLength);

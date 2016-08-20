@@ -5,7 +5,7 @@ public class MapTile
 {
 	// Type of tile
 	GameObject tileType;
-	Vector2 position;
+	//Vector2 position;
 
 	bool visited = false;
 
@@ -13,7 +13,7 @@ public class MapTile
 		Vector2 _pos,
 		bool _visited)
 	{
-		position = _pos;
+		//position = _pos;
 		visited = _visited;
 	}
 
