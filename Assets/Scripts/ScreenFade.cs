@@ -6,13 +6,14 @@ public class ScreenFade : MonoBehaviour
 {
 	CanvasGroup group;
 	float a = 0;
-	LevelManager levelManager;
+	//LevelManager levelManager;
 	bool readyToR = false;
+	public ProceduralMapGeneration mapGen;
 
 	void Start()
 	{
 		group = GetComponent<CanvasGroup>();
-		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		//levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 	}
 
 	void Update()
@@ -69,10 +70,13 @@ public class ScreenFade : MonoBehaviour
 			yield return null;
 		}
 		group.alpha = 1;
-		GameObject.FindWithTag("Player").GetComponent<Movement>().Reset();
-		GameObject.FindWithTag("Player").GetComponent<Movement>().SetMovement(true);
+		GameObject player = GameObject.FindWithTag("Player");
+		player.GetComponent<Movement>().Reset();
+		player.GetComponent<Movement>().SetMovement(true);
 		StartCoroutine(FadeOutAndNewLevel());
-		levelManager.NextLevel();
+		//levelManager.NextLevel();
+		mapGen.GenerateMap();
+		player.GetComponent<Movement>().NextLevel();
 	}
 
 	IEnumerator FadeOutAndNewLevel()

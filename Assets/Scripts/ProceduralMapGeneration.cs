@@ -40,23 +40,50 @@ public class ProceduralMapGeneration : MonoBehaviour
 		CubeDoor;
 
 	public GameObject enemyDude;
-	public GameObject playerDude;
+	public Transform targetPos;
+	public Transform putPlayer;
+	public Transform nextLevel;
+	GameObject playerDude;
+	GameObject map;
 	int numberOfEnemies;
 
 	void Start()
 	{
-		Initialize ();
-
-		FindAssets ();
-		CreateBasicTileLayout ();
-		DefineStartEnd ();
-		FillGrid ();
-		PlaceEnemies ();
+		playerDude = GameObject.FindGameObjectWithTag("Player");
+		map = GameObject.FindWithTag("Map");
+		GenerateMap();
 	}
 
 	void Update()
 	{
 		
+	}
+
+	public void GenerateMap()
+	{
+		DeletePrior();
+		Initialize();
+
+		FindAssets();
+		CreateBasicTileLayout();
+		DefineStartEnd();
+		FillGrid();
+		PlaceEnemies();
+
+		ScaleParent();
+		PlacePlayer();
+	}
+
+	void DeletePrior()
+	{
+		Transform[] oldObjects = map.GetComponentsInChildren<Transform>();
+		for (int i = 0; i < oldObjects.Length; i++)
+		{
+			if (oldObjects[i].tag != "Map" && oldObjects[i].tag != "PutPlayer" && oldObjects[i].tag != "NextLevel")
+				Destroy(oldObjects[i].gameObject);
+		}
+
+		ResetParent();
 	}
 
 	void Initialize(){
@@ -67,7 +94,6 @@ public class ProceduralMapGeneration : MonoBehaviour
 		mapTileArray = new MapTile[200];
 
 		numberOfEnemies = Random.Range (3, 9);
-		playerDude = GameObject.FindGameObjectWithTag ("Player");
 	}
 
 	void PlaceEnemies(){
@@ -105,6 +131,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 				0.35f,
 				enemyInst.GetComponent<Transform> ().localPosition.z);
 			enemyInst.GetComponent<Transform> ().localScale = new Vector3 (0.35f, 0.35f, 0.35f);
+			enemyInst.transform.parent = map.transform;
 		}
 	}
 
@@ -163,16 +190,18 @@ public class ProceduralMapGeneration : MonoBehaviour
 		randStart = (int)Random.Range (0+1, floorSize.y-1);
 
 		startSpot = new Vector2(0, randStart);
-		ReplaceCell (0, randStart, CubeDoor, tileSize.x, tileSize.y, 0); 
+		//ReplaceCell (0, randStart, CubeDoor, tileSize.x, tileSize.y, 0); 
 
 		endSpot = new Vector2(floorSize.x -1, floorSize.y - randStart -1);
 		ReplaceCell ((int)(floorSize.x -1), (int)(floorSize.y - randStart -1), CubeDoor, tileSize.x, tileSize.y, 180);
+		nextLevel.position = new Vector3(endSpot.x+0.5f, nextLevel.position.y, endSpot.y);
+
 
 		mapTile[(int)startSpot.x, (int)startSpot.y].SetVisited (true);
 		mapTile[(int)startSpot.x, (int)startSpot.y].SetPosition (new Vector3(startSpot.x, 0, startSpot.y));
 
-		playerDude.transform.position = new Vector3 (startSpot.x, 0.35f, startSpot.y);
-		playerDude.transform.localScale = new Vector3 (0.35f, 0.35f, 0.35f);
+		putPlayer.position = new Vector3 (startSpot.x, 0, startSpot.y);
+		putPlayer.localScale = new Vector3 (0.35f, 0.35f, 0.35f);
 
 		mapTile[(int)endSpot.x, (int)endSpot.y].SetVisited (true);
 		mapTile[(int)endSpot.x, (int)endSpot.y].SetPosition (new Vector3(endSpot.x, 0, endSpot.y));
@@ -244,9 +273,9 @@ public class ProceduralMapGeneration : MonoBehaviour
 					#region boundary walls
 					if (i == 0 || j == 0 || i == floorSize.y - 1 || j == floorSize.y - 1 || i == 2 || j == 2 || i == 7 || j == 7) {
 						
-						if (i == 0) {
-							ReplaceCell (i, j, CubeLeftTall, tileSize.x, tileSize.y, 0);
-						}
+						//if (i == 0) {
+						//	ReplaceCell (i, j, CubeLeftTall, tileSize.x, tileSize.y, 0);
+						//}
 						if (j == 0) {
 							ReplaceCell (i, j, CubeLeftTall, tileSize.x, tileSize.y, 270);
 						}
@@ -268,12 +297,12 @@ public class ProceduralMapGeneration : MonoBehaviour
 						if (i == floorSize.y - 1 && i == 7) {
 							ReplaceCell (i, j, CubeLeftTall, tileSize.x, tileSize.y, 180);
 						}
-						if (i == 0 && j == 0) {
-							ReplaceCell (i, j, Cube2WallCornerTall, tileSize.x, tileSize.y, 180);
-						}
-						if (i == 0 && j == floorSize.y - 1) {
-							ReplaceCell (i, j, Cube2WallCornerTall, tileSize.x, tileSize.y, 270);
-						}
+						//if (i == 0 && j == 0) {
+						//	ReplaceCell (i, j, Cube2WallCornerTall, tileSize.x, tileSize.y, 180);
+						//}
+						//if (i == 0 && j == floorSize.y - 1) {
+						//	ReplaceCell (i, j, Cube2WallCornerTall, tileSize.x, tileSize.y, 270);
+						//}
 						if (i == floorSize.y - 1 && j == 0) {
 							ReplaceCell (i, j, Cube2WallCornerTall, tileSize.x, tileSize.y, 90);
 						}
@@ -318,7 +347,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 							ReplaceCell (i, j, Cube4Wall, tileSize.x, tileSize.y, randRotation);
 
 						tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSize.x, 0.1f, tileSize.y);
-						tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+						tiles [i, j].transform.parent = map.transform;
 					}
 
 					#endregion
@@ -540,6 +569,25 @@ public class ProceduralMapGeneration : MonoBehaviour
 		tiles [i, j] = (GameObject)Instantiate (instObj, new Vector3 (i * tileSizeX * 10, 0, j * tileSizeY * 10), Quaternion.identity);
 		tiles [i, j].transform.Rotate (new Vector3(0,rotAngle,0));
 		tiles [i, j].GetComponent<Transform> ().localScale = new Vector3 (tileSizeX, 0.1f, tileSizeY);
-		tiles [i, j].transform.parent = GameObject.Find ("MapTiles").transform;
+		tiles [i, j].transform.parent = map.transform;
+	}
+
+	void ScaleParent()
+	{
+		map.transform.localScale = new Vector3(3, 3, 3);
+		map.transform.rotation = Quaternion.Euler(0, -90, 0);
+		map.transform.position = targetPos.position;
+	}
+
+	void ResetParent()
+	{
+		map.transform.localScale = Vector3.one;
+		map.transform.rotation = Quaternion.identity;
+		map.transform.position = Vector3.zero;
+	}
+
+	void PlacePlayer()
+	{
+		playerDude.transform.position = new Vector3(putPlayer.position.x, playerDude.transform.position.y, putPlayer.position.z);
 	}
 }
