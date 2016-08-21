@@ -19,22 +19,13 @@ public class FollowCam : MonoBehaviour
 		startY = player.position.y;
 		//startX = transform.position.x;
 
-		Vector3 target = player.position;
-		Vector3 newPos;
-		//target.x = startX;
-		target.y = startY;
-
-		newPos = target - Vector3.forward * dist;
-		newPos += Vector3.up * vert;
-
-		transform.position = newPos;
+		ForceSetCam();
 	}
 
 	void LateUpdate()
 	{
 		Vector3 target = player.position;
 		Vector3 newPos;
-		//target.x = startX;
 		target.y = startY;
 
 		newPos = target - Vector3.forward * dist;
@@ -50,5 +41,17 @@ public class FollowCam : MonoBehaviour
 		}
 		else
 			transform.position = newPos;
+	}
+
+	public void ForceSetCam()
+	{
+		Vector3 target = player.position;
+		Vector3 newPos;
+		target.y = startY;
+
+		newPos = target - Vector3.forward * dist;
+		newPos += Vector3.up * vert;
+
+		transform.position = newPos;
 	}
 }

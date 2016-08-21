@@ -589,5 +589,7 @@ public class ProceduralMapGeneration : MonoBehaviour
 	void PlacePlayer()
 	{
 		playerDude.transform.position = new Vector3(putPlayer.position.x, playerDude.transform.position.y, putPlayer.position.z);
+		playerDude.GetComponent<Movement>().NextLevel();
+		GameObject.FindWithTag("MainCamera").GetComponent<FollowCam>().ForceSetCam();
 	}
 }

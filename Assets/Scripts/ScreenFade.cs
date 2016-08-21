@@ -22,6 +22,7 @@ public class ScreenFade : MonoBehaviour
 		{
 			StartCoroutine(FadeOutAndDie());
 			GameObject.Find("LoseCanvas").GetComponent<Canvas>().enabled = false;
+			readyToR = false;
 		}
 	}
 
@@ -45,6 +46,7 @@ public class ScreenFade : MonoBehaviour
 		}
 		group.alpha = 1;
 		GameObject.FindWithTag("Player").GetComponent<Movement>().Reset();
+		GameObject.FindWithTag("MainCamera").GetComponent<FollowCam>().ForceSetCam();
 		GameObject.FindWithTag("Player").GetComponent<Movement>().SetMovement(true);
 		GameObject.Find("LoseCanvas").GetComponent<Canvas>().enabled = true;
 		readyToR = true;
@@ -76,7 +78,6 @@ public class ScreenFade : MonoBehaviour
 		StartCoroutine(FadeOutAndNewLevel());
 		//levelManager.NextLevel();
 		mapGen.GenerateMap();
-		player.GetComponent<Movement>().NextLevel();
 	}
 
 	IEnumerator FadeOutAndNewLevel()
